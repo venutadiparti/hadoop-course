@@ -28,16 +28,17 @@ public class MostSeenStartLetterJobControl extends Configured implements Tool{
 		String inputText = args[0];
 		String finalOutput = args[1];
 		
-		String intermediateTempDir = "/" + MostSeenStartLetterJobControl.class.getSimpleName() + "-tmp";
+		String intermediateTempDir = "/" + getClass().getSimpleName() + "-tmp";
 		Path intermediatePath = new Path(intermediateTempDir);
 		deleteIntermediateDir(intermediatePath);
 		
 		try {
-			JobControl control = new JobControl("Most");
-			ControlledJob step1 = new ControlledJob(getCountJob(inputText, intermediateTempDir), null);
-			control.addJob(step1);
+			JobControl control = new JobControl("Worklfow-Example");
 			
+			ControlledJob step1 = new ControlledJob(getCountJob(inputText, intermediateTempDir), null);
 			ControlledJob step2 = new ControlledJob(getMostSeenJob(intermediateTempDir, finalOutput), Arrays.asList(step1));
+			
+			control.addJob(step1);
 			control.addJob(step2);
 			
 			Thread workflowThread = new Thread(control, "Workflow-Thread");

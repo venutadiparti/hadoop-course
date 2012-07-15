@@ -14,6 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
 		<oozie_workflow_dir>${play_area}/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
+		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
 	</properties>
 
 	<dependencies>
@@ -128,6 +129,21 @@
 							<resources>
 								<resource>
 									<directory>src/main/resources/mr/workflows/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-pig-scripts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${pig_scripts_dir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/pig/</directory>
 								</resource>
 							</resources>
 						</configuration>
