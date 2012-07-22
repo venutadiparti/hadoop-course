@@ -13,7 +13,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StartsWithCountJobTests {
+public class StartsWithCountJobTest {
 	
 	private File inputFile = new File("./target/test/input.txt");
 	private File output = new File("./target/test-result/");

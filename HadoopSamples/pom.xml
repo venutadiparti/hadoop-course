@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>training</groupId>
-	<artifactId>hadoop</artifactId>
+	<artifactId>hadoop-samples</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>hadoop</name>
+	<name>Hadoop Training Sample Code</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -15,35 +15,39 @@
 		<play_area>/home/hadoop/Training/play_area</play_area>
 		<oozie_workflow_dir>${play_area}/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
 		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
-		<cdh_version>2.0.0-cdh4.0.0</cdh_version>
+		
+		<hadoop_version>2.0.0-cdh4.0.0</hadoop_version>
+		<hbase_version>0.92.1-cdh4.0.0</hbase_version>
+		<junit_version>4.8.1</junit_version>
+		<commons_io_version>2.3</commons_io_version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>${junit_version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.3</version>
+			<version>${commons_io_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
-			<version>${cdh_version}</version>
+			<version>${hadoop_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
-			<version>${cdh_version}</version>
+			<version>${hadoop_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase</artifactId>
-			<version>0.92.1-cdh4.0.0</version>
+			<version>${hbase_version}</version>
 		</dependency>
 
 	</dependencies>
