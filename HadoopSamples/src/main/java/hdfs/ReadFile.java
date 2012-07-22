@@ -16,7 +16,7 @@ public class ReadFile {
 		InputStream input = null;
 		try {
 			input = fs.open(fileToRead);
-			IOUtils.copyBytes(input, System.out, 4096, false);
+			IOUtils.copyBytes(input, System.out, 4096);
 		} finally {
 			IOUtils.closeStream(input);
 		}

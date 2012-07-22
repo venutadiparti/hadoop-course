@@ -16,10 +16,11 @@ public class WriteToFile {
 	public static void main(String[] args) throws IOException {
 		String textToWrite = "Hello HDFS! Elephants are awesome!\n";
 		InputStream in = new BufferedInputStream(new ByteArrayInputStream(textToWrite.getBytes()));
+		Path toHdfs = new Path("/training/playArea/writeMe.txt");
 		
 		Configuration conf = new Configuration();
-		Path toHdfs = new Path("/training/playArea/writeMe.txt");
 		FileSystem fs = FileSystem.get(conf);
+		
 		FSDataOutputStream out = fs.create(toHdfs);
 		IOUtils.copyBytes(in, out, conf);
 	}

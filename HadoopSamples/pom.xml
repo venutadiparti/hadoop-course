@@ -15,6 +15,7 @@
 		<play_area>/home/hadoop/Training/play_area</play_area>
 		<oozie_workflow_dir>${play_area}/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
 		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
+		<cdh_version>2.0.0-cdh4.0.0</cdh_version>
 	</properties>
 
 	<dependencies>
@@ -32,19 +33,17 @@
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
-			<version>0.23.1-cdh4.0.0b2</version>
+			<version>${cdh_version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
-			<version>0.23.1-cdh4.0.0b2</version>
+			<version>${cdh_version}</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase</artifactId>
-			<version>0.92.1-cdh4.0.0b2</version>
+			<version>0.92.1-cdh4.0.0</version>
 		</dependency>
 
 	</dependencies>
