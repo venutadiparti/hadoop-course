@@ -20,7 +20,6 @@ public class StartsWithCountMapper extends Mapper<LongWritable, Text, Text, IntW
 		StringTokenizer tokenizer = new StringTokenizer(value.toString());
 		while (tokenizer.hasMoreTokens()) {
 			reusableText.set(tokenizer.nextToken().substring(0, 1));
-			log.info("Emitting: [" + reusableText + "-" + countOne + "]");
 			context.write(reusableText, countOne);
 		}
 	}

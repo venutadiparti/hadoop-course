@@ -17,7 +17,6 @@ public class StartsWithCountReducer extends
 		for (IntWritable count : counts) {
 			sum+= count.get();
 		}
-		log.info("Emitting: [" + token + "-" + sum + "]");
 		context.write(token, new IntWritable(sum));
 	}
 }

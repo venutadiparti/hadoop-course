@@ -13,8 +13,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
-		<oozie_workflow_dir>${play_area}/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
+		<oozie_workflow_dir>${play_area}/oozie/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
 		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
+		<local_example_dir>${play_area}/local/</local_example_dir>
 		
 		<hadoop_version>2.0.0-cdh4.0.0</hadoop_version>
 		<hbase_version>0.92.1-cdh4.0.0</hbase_version>
@@ -147,6 +148,21 @@
 							<resources>
 								<resource>
 									<directory>src/main/resources/pig/</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-local-example</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${local_example_dir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/mr/local</directory>
 								</resource>
 							</resources>
 						</configuration>
