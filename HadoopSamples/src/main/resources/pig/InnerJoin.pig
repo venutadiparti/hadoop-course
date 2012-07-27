@@ -1,5 +1,5 @@
 --InnerJoin.pig
-posts = load '/training/data/user-posts.txt' using PigStorage(',') as (user:chararray,post:chararray,date:long);
-likes = load '/training/data/user-likes.txt' using PigStorage(',') as (user:chararray,likes:int,date:long);
-userInfo = join posts by user, likes by user;
-dump userInfo;
+posts = LOAD '/training/data/user-posts.txt' USING PigStorage(',') AS (user:chararray,post:chararray,date:long);
+likes = LOAD '/training/data/user-likes.txt' USING PigStorage(',') AS (user:chararray,likes:int,date:long);
+userInfo = JOIN posts BY user, likes BY user;
+DUMP userInfo;
