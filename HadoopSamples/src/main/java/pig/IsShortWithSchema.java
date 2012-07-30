@@ -14,6 +14,7 @@ import org.apache.pig.impl.logicalLayer.schema.Schema.FieldSchema;
 
 public class IsShortWithSchema extends FilterFunc {
 	private static final int MAX_CHARS = 15;
+
 	@Override
 	public Boolean exec(Tuple tuple) throws IOException {
 		if (tuple == null || tuple.isNull() || tuple.size() == 0) {
@@ -33,8 +34,9 @@ public class IsShortWithSchema extends FilterFunc {
 	@Override
 	public List<FuncSpec> getArgToFuncMapping() throws FrontendException {
 		List<FuncSpec> schemaSpec = new ArrayList<FuncSpec>();
+		FieldSchema fieldSchema = new FieldSchema(null, DataType.CHARARRAY);
 		FuncSpec fieldSpec = new FuncSpec(this.getClass().getName(),
-				new Schema(new FieldSchema(null, DataType.CHARARRAY)));
+				new Schema(fieldSchema));
 		schemaSpec.add(fieldSpec);
 
 		return schemaSpec;
