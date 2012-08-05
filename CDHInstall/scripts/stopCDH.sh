@@ -6,6 +6,6 @@ cd $HADOOP_HOME/sbin
 ./stop-yarn.sh
 ./stop-dfs.sh
 cd $OOZIE_HOME/bin
-#./oozie-stop.sh
+./oozie-stop.sh
 
 

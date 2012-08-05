@@ -18,4 +18,4 @@ echo "Safemode is off! Continuing..."
 cd $HBASE_HOME/bin
 ./start-hbase.sh
 cd $OOZIE_HOME/bin
-#./oozie-start.sh
+./oozie-start.sh

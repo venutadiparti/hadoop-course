@@ -42,4 +42,12 @@
     <value>yarn</value>
     <description>Use YARN as the servicer of MapReduce, if not specified Local Job Runner is used</description>
   </property>
+
+  <property>
+    <name>mapred.submit.replication</name>
+    <value>1</value>
+    <description>Replication factor on HDFS for the resources required to execute a job</description>
+  </property>
+
+
 </configuration>

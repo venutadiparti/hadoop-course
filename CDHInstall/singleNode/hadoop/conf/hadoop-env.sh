@@ -39,8 +39,7 @@ for f in $HADOOP_HOME/contrib/capacity-scheduler/*.jar; do
     export HADOOP_CLASSPATH=$f
   fi
 done
-export HADOOP_CLASSPATH=$HBASE_HOME/hbase-0.92.1-cdh4.0.0-security.jar:$HBASE_HOME/conf:$HADOOP_CLASSPATH
-#export HADOOP_CLASSPATH=`$HBASE_HOME/bin/hbase classpath`:$HADOOP_CLASSPATH
+export HADOOP_CLASSPATH=$HBASE_HOME/*:$HBASE_HOME/conf:$HADOOP_CLASSPATH
 
 # The maximum amount of heap to use, in MB. Default is 1000.
 export HADOOP_HEAPSIZE="256"
