@@ -23,6 +23,8 @@
 		
 		<junit_version>4.8.1</junit_version>
 		<commons_io_version>2.3</commons_io_version>
+		
+		<exercises.version>1.0</exercises.version>
 	</properties>
 
 	<dependencies>
@@ -57,8 +59,11 @@
 			<artifactId>pig</artifactId>
 			<version>${pig_version}</version>
 		</dependency>
-		 
-
+		<dependency>
+			<groupId>training</groupId>
+			<artifactId>hadoop-exercises</artifactId>
+			<version>${exercises.version}</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
