@@ -12,10 +12,9 @@ import org.apache.hadoop.util.ToolRunner;
 
 public class StartsWithCountJob extends Configured implements Tool{
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public int run(String[] args) throws Exception {
-		Job job = new Job(getConf(), "StartsWithCount");		
+		Job job = Job.getInstance(getConf(), "StartsWithCount");		
 		job.setJarByClass(getClass());
 
 		// configure output and input source
