@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
-		<oozie_workflow_dir>${play_area}/oozie/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
+		<oozie_workflow_dir>${play_area}/oozie/oozie-exercise-workflow</oozie_workflow_dir>
 		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
 		<local_example_dir>${play_area}/local/</local_example_dir>
 		
@@ -145,7 +145,7 @@
 							<outputDirectory>${oozie_workflow_dir}</outputDirectory>
 							<resources>
 								<resource>
-									<directory>src/main/resources/mr/workflows/</directory>
+									<directory>src/main/resources/oozie/workflows/</directory>
 								</resource>
 							</resources>
 						</configuration>
