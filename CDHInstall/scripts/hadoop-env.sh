@@ -28,7 +28,9 @@ export PIG_HOME=$CDH_HOME/pig-0.9.2-cdh4.0.0
 
 export HIVE_HOME=$CDH_HOME/hive-0.8.1-cdh4.0.0
 
-export HADOOP_SAMPLES_SRC=/home/hadoop/Training/eclipse_workspace/HadoopSamples/src/main
+export HADOOP_SAMPLES_SRC=$TRAINING_HOME/eclipse_workspace/HadoopSamples/src/main
+export HADOOP_SOLUTIONS_SRC=$TRAINING_HOME/eclipse_workspace/Solutions/src/main
+export HADOOP_EXERCISES_SRC=$TRAINING_HOME/eclipse_workspace/Exercises/src/main
 
 export PATH=$PATH:./:/home/hadoop/Training/scripts:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HBASE_HOME/bin:$OOZIE_HOME/bin:$PIG_HOME/bin:$HIVE_HOME/bin
 
