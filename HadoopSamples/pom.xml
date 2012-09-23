@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
 		<oozie_workflow_dir>${play_area}/oozie/mostSeenLetter-oozieWorkflow</oozie_workflow_dir>
-		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
+		<pig_scripts_dir>${play_area}/pig/scripts-samples</pig_scripts_dir>
 		<local_example_dir>${play_area}/local/</local_example_dir>
 		
 		<hadoop_version>2.0.0-cdh4.0.0</hadoop_version>
