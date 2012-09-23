@@ -13,7 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
-		<oozie_workflow_dir>${play_area}/oozie/oozie-exercise-workflow</oozie_workflow_dir>
+		<oozie_workflow_dir>${play_area}/oozie/oozie-exercise-workflow-solution</oozie_workflow_dir>
 		<pig_scripts_dir>${play_area}/pig/scripts</pig_scripts_dir>
 		<local_example_dir>${play_area}/local/</local_example_dir>
 		
@@ -121,9 +121,15 @@
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${oozie_workflow_dir}/lib</outputDirectory>
-									<destFileName>Solutions.jar</destFileName>
 								</artifactItem>
-
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>hadoop-exercises</artifactId>
+									<version>${exercises.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${oozie_workflow_dir}/lib</outputDirectory>
+								</artifactItem>
 							</artifactItems>
 
 						</configuration>
