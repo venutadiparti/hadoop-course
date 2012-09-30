@@ -126,8 +126,16 @@
 									<outputDirectory>${oozie_workflow_dir}/lib</outputDirectory>
 									<destFileName>${jar.name}</destFileName>
 								</artifactItem>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${pig_scripts_dir}</outputDirectory>
+									<destFileName>${jar.name}</destFileName>
+								</artifactItem>
 							</artifactItems>
-
 						</configuration>
 					</execution>
 				</executions>

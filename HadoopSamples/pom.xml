@@ -118,7 +118,15 @@
 									<outputDirectory>${oozie_workflow_dir}/lib</outputDirectory>
 									<destFileName>HadoopSamples.jar</destFileName>
 								</artifactItem>
-
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${pig_scripts_dir}</outputDirectory>
+									<destFileName>HadoopSamples.jar</destFileName>
+								</artifactItem>
 							</artifactItems>
 
 						</configuration>
