@@ -1,3 +1,4 @@
+#/bin/bash
 cd $OOZIE_HOME/bin
 ./oozie-stop.sh
 cd $HBASE_HOME/bin

@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 ###################################
 #  Upload Oozie job to HDFS and invoke it
 #  Example: $ ./runOozieWorkflow.sh $PLAY_AREA/oozie/oozie-exercise-workflow

@@ -1,3 +1,4 @@
+#/bin/bash
 export TRAINING_HOME=/home/hadoop/Training
 export HADOOP_LOGS=$TRAINING_HOME/logs
 export HADOOP_WORK_DIR=$TRAINING_HOME/hadoop_work
