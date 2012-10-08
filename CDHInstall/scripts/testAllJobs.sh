@@ -84,7 +84,7 @@ execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.MkDir"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.SimpleLs"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.LsWithPathFilter"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.SimpleGlobbing /training/data/glob/201*"
-execCommandExpectReturnCode "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.BadRename" 1
+execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.BadRename"
 
 log "############################################
 # HBase Samples
@@ -98,6 +98,8 @@ echo "put 'HBaseSamples', 'rowToDelete', 'metrics:loan', 'deleteme'" | hbase she
 echo "put 'HBaseSamples', 'anotherRow', 'metrics:keepMe', 'keepMe'" | hbase shell
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hbase.DeleteExample"
 
+echo "disable 'NewTable'" | hbase shell
+echo "drop 'NewTable'" | hbase shell
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hbase.CreateTableExample"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hbase.DropTableExample"
 
