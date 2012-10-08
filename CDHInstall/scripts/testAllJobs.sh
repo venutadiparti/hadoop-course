@@ -22,7 +22,7 @@ function logFailure(){
 }
 
 function execCommand(){
-   execCommandExpectReturnCode "$1" "$2" "$3" 0
+   execCommandExpectReturnCode "$1" 0
 }
 
 function execCommandExpectReturnCode(){
@@ -30,8 +30,8 @@ function execCommandExpectReturnCode(){
    log "Executing: [$1]"
    eval $1
    result=$?
-   if [ $result -ne $4 ]; then
-       logFailure "  Failed to execute [$1], return code [$result] but expected [$4]"
+   if [ $result -ne $2 ]; then
+       logFailure "  Failed to execute [$1], return code [$result] but expected [$2]"
        numFailed=`expr $numFailed + 1`
    fi
    log "Executed: [$1] return-code=[$result]"
