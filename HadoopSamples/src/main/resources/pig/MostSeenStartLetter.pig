@@ -1,5 +1,5 @@
 -- 1: Load text into a bag, where a row is a line of text
-lines = LOAD '/training/playArea/hamlet.txt' AS (line:chararray);
+lines = LOAD '/training/data/hamlet.txt' AS (line:chararray);
 -- 2: Tokenize the provided text
 tokens = FOREACH lines GENERATE flatten(TOKENIZE(line)) AS token:chararray;
 -- 3: Retain first letter of each token

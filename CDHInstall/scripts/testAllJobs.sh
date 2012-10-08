@@ -1,4 +1,18 @@
 #/bin/bash
+
+totalJobs=0
+numFailed=0
+
+startTime=`date '+%Y%m%d%H%M%S'`
+logBase="/home/hadoop/Training/scripts/"
+log=$logBase"log-allJobs.txt"
+errorLog=$logBase"log-failedCommands.txt"
+
+echo "Logs: [$log]"
+echo "Errors: [$errorLog]"
+
+
+
 function log(){
    echo "$1" >> /home/hadoop/Training/scripts/log-allJobs.txt
 }
@@ -18,9 +32,11 @@ function execCommandExpectReturnCode(){
    result=$?
    if [ $result -ne $4 ]; then
        logFailure "  Failed to execute [$1], return code [$result] but expected [$4]"
+       numFailed=`expr $numFailed + 1`
    fi
    log "Executed: [$1] return-code=[$result]"
    log "------------------------------------"
+   totalJobs=`expr $totalJobs + 1`
 }
 
 function execStep(){
@@ -29,6 +45,19 @@ function execStep(){
    execCommand "$1"
    hdfs dfs -rm -r "$2"
 }
+
+function printStats(){
+   currTime=`date '+%Y%m%d%H%M%S'`
+   runTime=`expr $currTime - $startTime`
+   printMsg="Ran [$totalJobs] Hadoop jobs with [$numFailed] failures in [$runTime] seconds"
+   log "$printMsg"
+   echo "##########################################################"
+   echo "#  $printMsg"
+   echo "#  Logs: [$log]"
+   echo "#  Errors: [$errorLog]"
+   echo "##########################################################"
+}
+
 
 log "############################################
 # HDFS Samples
@@ -46,7 +75,7 @@ execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.SimpleLs"
 
 hdfs dfs -rm /training/playArea/writeMe.txt
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.WriteToFile"
-execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.BadWriteToFile" 1
+execCommandExpectReturnCode "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.BadWriteToFile" 1
 hdfs dfs -rm /training/playArea/writeMe.txt
 
 execStep "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.CopyToHdfs" "/training/playArea/hamlet.txt" "$PLAY_AREA/"
@@ -163,12 +192,13 @@ log "############################################
 # Pig Samples
 ############################################"
 
-execCommand "pig $PLAY_AREA/pig/scripts-samples/MostSeenStartLetter.pig" "/training/playArea/pig/mostSeenLetterOutput" "$PLAY_AREA"
+execStep "pig $PLAY_AREA/pig/scripts-samples/MostSeenStartLetter.pig" "/training/playArea/pig/mostSeenLetterOutput" "$PLAY_AREA"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/InnerJoin.pig"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/InnerJoinWithMultipleKeys.pig"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/LeftOuterJoin.pig"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/Cogroup.pig"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/CogroupInner.pig"
+cd $PLAY_AREA/
 execCommand "pig $PLAY_AREA/pig/scripts-samples/CustomFilter.pig"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/CustomFilter-NoSchema.pig"
 execCommand "pig $PLAY_AREA/pig/scripts-samples/CustomFilter-WithSchema.pig"
@@ -200,7 +230,7 @@ mapRed.firstJob.LengthDividerCountTool \
 /training/exercises/mapRed/firstJob/ex2" "/training/exercises/mapRed/firstJob/ex2" "$PLAY_AREA"
 
 execCommand "yarn jar $PLAY_AREA/Exercises.jar mapRed.runningJobs.ExpectProperty -Dtraining.prop=hi"
-execCommand "yarn jar $PLAY_AREA/Exercises.jar mapRed.runningJobs.ExpectClassOnClient" 1
+execCommandExpectReturnCode "yarn jar $PLAY_AREA/Exercises.jar mapRed.runningJobs.ExpectClassOnClient" 1
 execStep "yarn jar $PLAY_AREA/Exercises.jar mapRed.runningJobs.ExpectClassOnTask \
 -libjars $PLAY_AREA/HadoopSamples.jar \
 /training/data/hamlet.txt /training/playArea/ExpectClassOnTask" "/training/playArea/ExpectClassOnTask" "$PLAY_AREA"
@@ -226,7 +256,7 @@ execStep "yarn jar $PLAY_AREA/Solutions.jar mapRed.features.LineSamplerTool \
 
 # Jobs on YARN Exercises
 hdfs dfs -rm -r /training/playArea/JobsOnYarn
-execCommand "yarn jar $PLAY_AREA/Exercises.jar mapRed.jobOnYARN.JobWithFailures \
+execCommandExpectReturnCode "yarn jar $PLAY_AREA/Exercises.jar mapRed.jobOnYARN.JobWithFailures \
 /training/data/hamlet.txt /training/playArea/JobsOnYarn" 1
 hdfs dfs -rm -r /training/playArea/JobsOnYarn
 
@@ -250,7 +280,7 @@ execCommand "cat $HADOOP_SOLUTIONS_SRC/resources/mapRed/streaming/inputTest.txt 
 $HADOOP_SOLUTIONS_SRC/resources/mapRed/streaming/LengthDividerMapper.py | \
 sort | $HADOOP_SOLUTIONS_SRC/resources/mapRed/streaming/CountUniqueReducer.py"
 execStep "yarn jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
--D mapred.job.name="Count Job via Streaming" \
+-D mapred.job.name='Count Job via Streaming' \
 -files $HADOOP_SOLUTIONS_SRC/resources/mapRed/streaming/LengthDividerMapper.py,\
 $HADOOP_SOLUTIONS_SRC/resources/mapRed/streaming/CountUniqueReducer.py \
 -input /training/data/war_and_peace.txt \
@@ -264,7 +294,7 @@ execStep "yarn jar $PLAY_AREA/Solutions.jar mapRed.workflows.JobControlWorkflow 
 /training/data/hamlet.txt /training/playArea/JobControlWorkflow" "/training/playArea/JobControlWorkflow" "$PLAY_AREA/"
 
 # Oozie Workflow
-execStep "/home/hadoop/Training/scripts/runOozieWorkflow.sh $PLAY_AREA/oozie/oozie-exercise-workflow" "/training/playArea/oozieExerciseWorkflow" "$PLAY_AREA/"
+execStep "/home/hadoop/Training/scripts/runOozieWorkflow.sh $PLAY_AREA/oozie/mostSeenLetter-oozieWorkflow" "/training/playArea/oozieWorkflow" "$PLAY_AREA/"
 
 # pig first lecture solution
 execStep "pig MostOccuredTokens.pig" "/training/playArea/pig/mostOccuredTokens" "$PLAY_AREA/pig/scripts-solutions"
@@ -273,3 +303,4 @@ execStep "pig MostOccuredTokens.pig" "/training/playArea/pig/mostOccuredTokens" 
 execStep "pig BookJoin.pig" "/training/exercises/pig/bookPurchases" "$PLAY_AREA/pig/scripts-solutions"
 execStep "pig BookCogroup.pig" "/training/exercises/pig/bookPurchases" "$PLAY_AREA/pig/scripts-solutions"
 
+printStats
