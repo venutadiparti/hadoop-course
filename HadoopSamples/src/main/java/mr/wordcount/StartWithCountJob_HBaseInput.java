@@ -19,10 +19,9 @@ public class StartWithCountJob_HBaseInput extends Configured implements Tool {
 	protected final static String FAMILY = "count";
 	protected final static String COLUMN = "word";
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public int run(String[] args) throws Exception {
-		Job job = new Job(getConf(), "StartsWithCount-FromHBase");
+		Job job = Job.getInstance(getConf(), "StartsWithCount-FromHBase");
 		job.setJarByClass(getClass());
 
 		// configure input

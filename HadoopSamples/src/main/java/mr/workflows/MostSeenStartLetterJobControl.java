@@ -73,7 +73,7 @@ public class MostSeenStartLetterJobControl extends Configured implements Tool{
 	}
 	
 	private Job getCountJob(String inputText, String tempOutputPath) throws IOException {
-		Job job = new Job(getConf(), "StartsWithCount");		
+		Job job = Job.getInstance(getConf(), "StartsWithCount");		
 		job.setJarByClass(getClass());
 
 		// configure output and input source
@@ -96,7 +96,7 @@ public class MostSeenStartLetterJobControl extends Configured implements Tool{
 	
 	private Job getMostSeenJob(String intermediateTempDir, String finalOutput) throws IOException {
 		
-		Job job = new Job(getConf(), "MostSeenStartLetter");		
+		Job job = Job.getInstance(getConf(), "MostSeenStartLetter");		
 		job.setJarByClass(getClass());
 
 		// configure output and input source

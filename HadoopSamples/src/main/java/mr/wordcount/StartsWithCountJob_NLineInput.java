@@ -13,10 +13,9 @@ import org.apache.hadoop.util.ToolRunner;
 
 public class StartsWithCountJob_NLineInput extends Configured implements Tool{
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public int run(String[] args) throws Exception {
-		Job job = new Job(getConf(), getClass().getSimpleName());		
+		Job job = Job.getInstance(getConf(), getClass().getSimpleName());		
 		job.setJarByClass(getClass());
 
 		// configure output and input source

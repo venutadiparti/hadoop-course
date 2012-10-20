@@ -1,7 +1,5 @@
 package common;
 
-import hdfs.SimpleLs;
-
 import mr.wordcount.StartsWithCountJob;
 
 import org.apache.hadoop.util.ProgramDriver;

@@ -19,10 +19,9 @@ public class StartWithCountJob_HBase extends Configured implements Tool {
 	
 	protected final static String RESULT_COLUMN = "result";
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public int run(String[] args) throws Exception {
-		Job job = new Job(getConf(), "StartsWithCount-HBase");
+		Job job = Job.getInstance(getConf(), "StartsWithCount-HBase");
 		job.setJarByClass(getClass());
 
 		Scan scan = new Scan();
