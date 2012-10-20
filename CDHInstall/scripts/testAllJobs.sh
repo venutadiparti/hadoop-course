@@ -78,7 +78,8 @@ execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.WriteToFile"
 execCommandExpectReturnCode "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.BadWriteToFile" 1
 hdfs dfs -rm /training/playArea/writeMe.txt
 
-execStep "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.CopyToHdfs" "/training/playArea/hamlet.txt" "$PLAY_AREA/"
+hdfs dfs -rm /training/playArea/hamlet.txt
+execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.CopyToHdfs"
 
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.MkDir"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar hdfs.SimpleLs"
