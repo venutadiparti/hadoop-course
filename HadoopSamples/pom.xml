@@ -57,7 +57,12 @@
 			<artifactId>pig</artifactId>
 			<version>${pig_version}</version>
 		</dependency>
-		 
+		
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-mapreduce-client-core</artifactId>
+			<version>${hadoop_version}</version>
+		</dependency>
 
 	</dependencies>
 

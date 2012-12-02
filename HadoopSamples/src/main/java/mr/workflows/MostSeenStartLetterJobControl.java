@@ -54,7 +54,7 @@ public class MostSeenStartLetterJobControl extends Configured implements Tool{
 					log.error(job.getJobName() + " failed");
 				}
 			} else {
-				log.error("Success!! Workflow completed [" + control.getSuccessfulJobList().size() + "] jobs");
+				log.info("Success!! Workflow completed [" + control.getSuccessfulJobList().size() + "] jobs");
 			}
 			
 		} finally {
