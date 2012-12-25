@@ -31,9 +31,19 @@
     <description>The memory that will be allocated for a mapper task, default is 1g</description>
   </property>
   <property>
+    <name>mapreduce.map.java.opts</name>
+    <value>-Xmx100m</value>
+    <description>JVM Heap size for Map tasks</description>
+  </property>
+  <property>
     <name>mapreduce.reduce.memory.mb</name>
     <value>128</value>
     <description>The memory that will be allocated for a reduce task, default is 1g</description>
+  </property>
+  <property>
+    <name>mapreduce.reduce.java.opts</name>
+    <value>-Xmx100m</value>
+    <description>JVM Heap size for Reduce tasks</description>
   </property>
   <property>
     <name>yarn.nodemanager.vmem-pmem-ratio</name>
@@ -43,8 +53,12 @@
   <property>
     <name>mapreduce.task.io.sort.mb</name>
     <value>32</value>
-    <description>The total amount of buffer memory to use while sorting files, in megabytes. By default, gives each merge stream 1MB, which should minimize seeks.</description>
+    <description>The total amount of buffer memory to use while sorting files, in megabytes.</description>
   </property>
-
+  <property>
+    <name>mapreduce.jobhistory.joblist.cache.size</name>
+    <value>100</value>
+    <description>Number of Jobs Histor Server keeps</description>
+  </property>
 
 </configuration>

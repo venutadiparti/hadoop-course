@@ -47,6 +47,16 @@
      <description>Disable authorization fo development and clusters that do not require security</description>
    </property>
 
+  <property>
+     <name>yarn.nodemanager.localizer.cache.target-size-mb</name>
+     <value>100</value>
+     <description>Target size of localizer cache in MB, per local directory</description>
+   </property>
+   <property>
+     <name>yarn.nodemanager.localizer.cache.cleanup.interval-ms</name>
+     <value>60000</value>
+     <description>Interval in between cache cleanups.</description>
+   </property>
 </configuration>
 
 
