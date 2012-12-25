@@ -22,7 +22,7 @@ public class StartsWithCountReducer_HBase extends
 		for (IntWritable count : counts) {
 			sum+= count.get();
 		}
-		Put put = new Put(key.getBytes());
+		Put put = new Put(key.copyBytes());
 		put.add(toBytes(FAMILY), toBytes(RESULT_COLUMN), toBytes(Integer.toString(sum)));
 		context.write(null, put);
 	}
