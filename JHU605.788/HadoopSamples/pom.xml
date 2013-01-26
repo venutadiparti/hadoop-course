@@ -21,7 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
 
-		<junit_version>3.8.1</junit_version>
+		<junit_version>4.11</junit_version>
 		<cdh_version>2.0.0-cdh4.1.2</cdh_version>
 	</properties>
 
