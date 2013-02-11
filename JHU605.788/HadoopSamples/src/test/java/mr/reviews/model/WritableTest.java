@@ -1,11 +1,11 @@
-package mr.blogs.model;
+package mr.reviews.model;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import mr.blogs.model.BlogKeyWritable;
-import mr.blogs.model.BlogWritable;
+import mr.reviews.model.ReviewKeyWritable;
+import mr.reviews.model.ReviewWritable;
 
 import org.apache.hadoop.io.DataInputBuffer;
 import org.apache.hadoop.io.DataOutputBuffer;
@@ -15,18 +15,18 @@ import org.junit.Test;
 public class WritableTest {
 
     @Test
-    public void testBlogWritableSerDer() throws IOException {
+    public void testReviewWritableSerDer() throws IOException {
         String author = "author";
         String content = "content";
         Long posted = 100000000l;
         
-        BlogWritable origWritable = new BlogWritable(author, content, posted);
+        ReviewWritable origWritable = new ReviewWritable(author, content, posted);
         
         DataOutputBuffer b1 = writeWritable(origWritable);
         DataInputBuffer in = new DataInputBuffer();
         in.reset(b1.getData(), b1.getLength());
 
-        BlogWritable result = new BlogWritable();
+        ReviewWritable result = new ReviewWritable();
         result.readFields(in);
         assertEquals(author, result.getAuthor());
         assertEquals(content, result.getContent());
@@ -34,17 +34,17 @@ public class WritableTest {
     }
     
     @Test
-    public void testBlogKeyWritableSerDer() throws IOException {
+    public void testReviewKeyWritableSerDer() throws IOException {
         String author = "author";
         String keyword = "keyword";
         
-        BlogKeyWritable origWritable = new BlogKeyWritable(author,keyword);
+        ReviewKeyWritable origWritable = new ReviewKeyWritable(author,keyword);
         
         DataOutputBuffer b1 = writeWritable(origWritable);
         DataInputBuffer in = new DataInputBuffer();
         in.reset(b1.getData(), b1.getLength());
 
-        BlogKeyWritable result = new BlogKeyWritable();
+        ReviewKeyWritable result = new ReviewKeyWritable();
         result.readFields(in);
         assertEquals(author, result.getAuthor());
         assertEquals(keyword, result.getKeyword());

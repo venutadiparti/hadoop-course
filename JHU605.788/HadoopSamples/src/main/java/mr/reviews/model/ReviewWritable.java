@@ -1,22 +1,22 @@
-package mr.blogs.model;
+package mr.reviews.model;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.io.Writable;
 
-public class BlogWritable implements WritableComparable<BlogWritable> {
+public class ReviewWritable implements Writable{
 
     private String author;
     private String content;
     private Long postedTimestamp;
 
-    public BlogWritable() {
+    public ReviewWritable() {
     }
 
-    public BlogWritable(String author, String content, Long posted) {
+    public ReviewWritable(String author, String content, Long posted) {
         this.setAuthor(author);
         this.setContent(content);
         this.setPostedTimestamp(posted);
@@ -34,11 +34,6 @@ public class BlogWritable implements WritableComparable<BlogWritable> {
         output.writeUTF(author);
         output.writeUTF(content);
         output.writeLong(postedTimestamp);
-    }
-
-    @Override
-    public int compareTo(BlogWritable other) {
-        return author.compareTo(other.author);
     }
 
     public String getAuthor() {

@@ -1,4 +1,4 @@
-package mr.blogs.model;
+package mr.reviews.model;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -7,15 +7,15 @@ import java.io.IOException;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.hadoop.io.WritableComparable;
 
-public class BlogKeyWritable implements WritableComparable<BlogKeyWritable> {
+public class ReviewKeyWritable implements WritableComparable<ReviewKeyWritable> {
 
     private String author;
     private String keyword;
 
-    public BlogKeyWritable() {
+    public ReviewKeyWritable() {
     }
 
-    public BlogKeyWritable(String author, String keyword) {
+    public ReviewKeyWritable(String author, String keyword) {
         this.setAuthor(author);
         this.setKeyword(keyword);
     }
@@ -33,7 +33,7 @@ public class BlogKeyWritable implements WritableComparable<BlogKeyWritable> {
     }
 
     @Override
-    public int compareTo(BlogKeyWritable other) {
+    public int compareTo(ReviewKeyWritable other) {
         return new CompareToBuilder()
                .append(this.author, other.author)
                .append(this.keyword, other.keyword)

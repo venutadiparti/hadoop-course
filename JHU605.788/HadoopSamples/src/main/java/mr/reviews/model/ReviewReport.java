@@ -1,32 +1,32 @@
-package mr.blogs.model;
+package mr.reviews.model;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class BlogReport {
+public class ReviewReport {
 
-    private int numBlogs;
+    private int numReviews;
     private String keyword;
     private String author;
     private String fullReport;
 
-    public BlogReport() {
+    public ReviewReport() {
 
     }
 
-    public BlogReport(int numBlogs, String keyword, String author, String fullReport) {
+    public ReviewReport(int numReviews, String keyword, String author, String fullReport) {
         super();
-        this.numBlogs = numBlogs;
+        this.numReviews = numReviews;
         this.keyword = keyword;
         this.author = author;
         this.fullReport = fullReport;
     }
 
-    public int getNumBlogs() {
-        return numBlogs;
+    public int getNumReviews() {
+        return numReviews;
     }
 
-    public void setNumBlogs(int numBlogs) {
-        this.numBlogs = numBlogs;
+    public void setNumReviews(int numReviews) {
+        this.numReviews = numReviews;
     }
 
     public String getKeyword() {
