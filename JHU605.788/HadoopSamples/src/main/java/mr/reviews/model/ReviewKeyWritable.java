@@ -5,6 +5,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.hadoop.io.WritableComparable;
 
 public class ReviewKeyWritable implements WritableComparable<ReviewKeyWritable> {
@@ -40,6 +41,11 @@ public class ReviewKeyWritable implements WritableComparable<ReviewKeyWritable> 
                .toComparison();
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
+    
     public String getAuthor() {
         return author;
     }

@@ -26,7 +26,7 @@ public class ReviewMapper extends Mapper<LongWritable, ReviewWritable, ReviewKey
     }
 
     @Override
-    protected void map(LongWritable lineNum, ReviewWritable incomingReview, Context context) throws IOException, InterruptedException {
+    protected void map(LongWritable reviewNum, ReviewWritable incomingReview, Context context) throws IOException, InterruptedException {
         for (String valueToLookFor : valuesToLookFor) {
             if (isValueIn(valueToLookFor, incomingReview.getContent())) {
                 keyWritable.setKeyword(valueToLookFor);
