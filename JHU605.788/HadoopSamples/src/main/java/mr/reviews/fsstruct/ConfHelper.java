@@ -27,7 +27,7 @@ public class ConfHelper {
         Validate.notEmpty(input, "Must provide input path via [" + PROP_INPUT_PATH + "] property");
         Path path =  new Path(input);
         FileSystem fs = FileSystem.get(conf);
-        Validate.isTrue(fs.exists(path), "The input directory [" + path + "] does not exist");
+        Validate.isTrue(fs.globStatus(path).length>0, "The input directory [" + path + "] does not exist");
         return path;
     }
 
