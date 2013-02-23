@@ -1,4 +1,4 @@
-package mr.reviews.fsstruct;
+package mr.reviews.fsstruct.support;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

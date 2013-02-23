@@ -1,4 +1,4 @@
-package mr.reviews.fsstruct;
+package mr.reviews.fsstruct.support;
 
 import java.io.IOException;
 import java.util.Arrays;

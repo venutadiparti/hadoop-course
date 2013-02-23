@@ -12,16 +12,18 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class SimpleTextXmlJob extends Configured implements Tool{
+public class SimpleTextXmlJob_CombineFileInputFormat extends Configured implements Tool{
 
     @Override
     public int run(String[] args) throws Exception {
         ConfHelper confHelper = new ConfHelper(getConf());
         Job job = Job.getInstance(getConf(), this.getClass().getName());
         job.setJarByClass(getClass());
+        
         // configure output and input source
-        EntireFileTextInputFormat.addInputPath(job, confHelper.getInput());
-        job.setInputFormatClass(EntireFileTextInputFormat.class);
+        EntireFileCombineFileTextInputFormat.addInputPath(job, confHelper.getInput());
+        EntireFileCombineFileTextInputFormat.setMaxInputSplitSize(job, 128*1024);
+        job.setInputFormatClass(EntireFileCombineFileTextInputFormat.class);
 
         // configure mapper and reducer
         job.setMapperClass(XmlProcessMapper.class);
@@ -39,7 +41,7 @@ public class SimpleTextXmlJob extends Configured implements Tool{
     }
 
     public static void main(String[] args) throws Exception {
-        int exitCode = ToolRunner.run(new SimpleTextXmlJob(), args);
+        int exitCode = ToolRunner.run(new SimpleTextXmlJob_CombineFileInputFormat(), args);
         System.exit(exitCode);
     }
 
