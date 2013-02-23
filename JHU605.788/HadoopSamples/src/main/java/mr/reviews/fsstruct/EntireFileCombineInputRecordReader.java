@@ -2,12 +2,11 @@ package mr.reviews.fsstruct;
 
 import java.io.IOException;
 
+import mr.reviews.fsstruct.support.FsHelper;
+
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FSDataInputStream;
-import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.BytesWritable;
-import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.RecordReader;
@@ -20,12 +19,10 @@ public class EntireFileCombineInputRecordReader extends RecordReader<NullWritabl
     private BytesWritable result = new BytesWritable();
     private boolean readIn = false;
     private Path path;
-    private long pathLength;
 
     public EntireFileCombineInputRecordReader(CombineFileSplit split, TaskAttemptContext context, Integer pathIndex){
         this.conf = context.getConfiguration();
         this.path = split.getPath(pathIndex);
-        this.pathLength = split.getLength(pathIndex);
     }
     
     @Override
@@ -38,18 +35,11 @@ public class EntireFileCombineInputRecordReader extends RecordReader<NullWritabl
         if (readIn) {
             return false;
         }
-
-        FileSystem fs = FileSystem.get(conf);
-        FSDataInputStream in = null;
-        try {
-            in = fs.open(path);
-
-            byte[] buffer = new byte[(int)pathLength];
-            IOUtils.readFully(in, buffer, 0, buffer.length);
-            result.set(buffer, 0, buffer.length);
-        } finally {
-            IOUtils.closeStream(in);
-        }
+        
+        FsHelper fsHelper = new FsHelper(conf);
+        byte[] buffer = fsHelper.readBytes(path);
+        result.set(buffer, 0, buffer.length);
+        
         readIn = true;
         return true;
     }

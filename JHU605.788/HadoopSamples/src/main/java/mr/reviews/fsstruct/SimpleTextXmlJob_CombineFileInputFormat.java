@@ -22,7 +22,7 @@ public class SimpleTextXmlJob_CombineFileInputFormat extends Configured implemen
         
         // configure output and input source
         EntireFileCombineFileTextInputFormat.addInputPath(job, confHelper.getInput());
-        EntireFileCombineFileTextInputFormat.setMaxInputSplitSize(job, 128*1024);
+        EntireFileCombineFileTextInputFormat.setMaxInputSplitSize(job, 256*1024); // 256kb
         job.setInputFormatClass(EntireFileCombineFileTextInputFormat.class);
 
         // configure mapper and reducer

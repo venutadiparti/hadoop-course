@@ -38,7 +38,7 @@ public class ConfHelper {
         FileSystem fs = FileSystem.get(conf);
         if (fs.exists(outPath)){
             fs.delete(outPath, true);
-            LOG.info("Removed output directory [" + outPath + "]");
+            LOG.info("Removed output [" + outPath + "]");
         }
         fs.close();
         return outPath;
