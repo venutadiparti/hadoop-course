@@ -2,7 +2,6 @@ package mr.reviews.fsstruct.avro;
 
 import java.io.IOException;
 
-import mr.reviews.fsstruct.avro.model.ReviewAvro;
 import mr.reviews.fsstruct.avro.model.ReviewKeyAvro;
 import mr.reviews.fsstruct.avro.model.ReviewReportAvro;
 import mr.reviews.fsstruct.support.ConfHelper;
@@ -13,7 +12,6 @@ import org.apache.avro.mapreduce.AvroKeyInputFormat;
 import org.apache.avro.mapreduce.AvroKeyOutputFormat;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
@@ -51,9 +49,11 @@ public class ReviewAvroJob extends Configured implements Tool {
 		
 		AvroKeyOutputFormat.setCompressOutput(job, true);
 		jobConf.set(AvroJob.CONF_OUTPUT_CODEC, CodecFactory.snappyCodec().toString());
-		job.setOutputKeyClass(ReviewAvro.class);
-        job.setOutputValueClass(NullWritable.class);
-        AvroJob.setOutputKeySchema(job, ReviewReportAvro.SCHEMA$);
+        
+		AvroJob.setOutputKeySchema(job, ReviewReportAvro.SCHEMA$);
+        // use the schema instead of set these methods
+//        job.setOutputKeyClass(ReviewAvro.class);
+//        job.setOutputValueClass(NullWritable.class);
 		
 		// configure mapper and reducer
 		job.setMapperClass(ReviewAvroMapper.class);
