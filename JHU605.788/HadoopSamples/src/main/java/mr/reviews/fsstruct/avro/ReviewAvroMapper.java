@@ -7,18 +7,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import mr.reviews.fsstruct.avro.model.ReviewAvro;
-import mr.reviews.model.ReviewKeyWritable;
-import mr.reviews.model.ReviewWritable;
+import mr.reviews.fsstruct.avro.model.ReviewKeyAvro;
+import mr.reviews.fsstruct.avro.model.ReviewReportAvro;
 
 import org.apache.avro.mapred.AvroKey;
+import org.apache.avro.mapred.AvroValue;
 import org.apache.commons.lang.Validate;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class ReviewAvroMapper extends Mapper<AvroKey<ReviewAvro>, NullWritable, ReviewKeyWritable, ReviewWritable> {
+public class ReviewAvroMapper extends Mapper<AvroKey<ReviewAvro>, NullWritable, AvroKey<ReviewKeyAvro>, AvroValue<ReviewReportAvro>> {
 
-    private ReviewKeyWritable keyWritable = new ReviewKeyWritable();
-    private ReviewWritable valueWritable = new ReviewWritable();
+    private ReviewReportAvro report = new ReviewReportAvro();
+    private ReviewKeyAvro reviewKey = new ReviewKeyAvro();
+    
+    private AvroKey<ReviewKeyAvro> key = new AvroKey<ReviewKeyAvro>();
+    private AvroValue<ReviewReportAvro> value = new AvroValue<ReviewReportAvro>();
     private List<String> valuesToLookFor;
 
     @Override
@@ -29,22 +33,29 @@ public class ReviewAvroMapper extends Mapper<AvroKey<ReviewAvro>, NullWritable, 
     }
 
     @Override
-    protected void map(AvroKey<ReviewAvro> key, NullWritable ignore, Context context) throws IOException, InterruptedException {
-        ReviewAvro review = key.datum();
+    protected void map(AvroKey<ReviewAvro> keyIn, NullWritable ignore, Context context) throws IOException, InterruptedException {
+        ReviewAvro review = keyIn.datum();
         for (String valueToLookFor : valuesToLookFor) {
             if (isValueIn(valueToLookFor, review.getText().toString())) {
-                keyWritable.setKeyword(valueToLookFor);
-                keyWritable.setAuthor(review.getUser().toString());
-                populateValue(review);
-                context.write(keyWritable, valueWritable);
+                updateKey(review, valueToLookFor);
+                updateValue(review, valueToLookFor);
+                context.write(key, value);
             }
         }
     }
 
-    private void populateValue(ReviewAvro review) {
-        valueWritable.setAuthor(review.getUser().toString());
-        valueWritable.setContent(review.getText().toString());
-        valueWritable.setPostedTimestamp(review.getTimestamp());
+    private void updateValue(ReviewAvro review, String valueToLookFor) {
+        report.setNumReviews(1);
+        report.setKeyword(valueToLookFor);
+        report.setReviews(Arrays.asList(review));
+        report.setUser(review.getUser());
+        value.datum(report);
+    }
+
+    private void updateKey(ReviewAvro review, String valueToLookFor) {
+        reviewKey.setKeyword(valueToLookFor);
+        reviewKey.setUser(review.getUser());
+        key.datum(reviewKey);
     }
 
     private boolean isValueIn(String valueToLookFor, String content) {

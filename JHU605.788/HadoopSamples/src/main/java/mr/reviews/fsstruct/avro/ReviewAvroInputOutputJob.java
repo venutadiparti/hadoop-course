@@ -3,9 +3,10 @@ package mr.reviews.fsstruct.avro;
 import java.io.IOException;
 
 import mr.reviews.fsstruct.avro.model.ReviewAvro;
-import mr.reviews.fsstruct.avro.model.ReviewKeyAvro;
 import mr.reviews.fsstruct.avro.model.ReviewReportAvro;
 import mr.reviews.fsstruct.support.ConfHelper;
+import mr.reviews.model.ReviewKeyWritable;
+import mr.reviews.model.ReviewWritable;
 
 import org.apache.avro.file.CodecFactory;
 import org.apache.avro.mapreduce.AvroJob;
@@ -18,7 +19,7 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class ReviewAvroJob extends Configured implements Tool {
+public class ReviewAvroInputOutputJob extends Configured implements Tool {
     
     public final static String PROP_FIND_VALUE  = "report.value";
     public final static String PROP_INPUT_PATH = "report.input.path";
@@ -56,19 +57,16 @@ public class ReviewAvroJob extends Configured implements Tool {
         AvroJob.setOutputKeySchema(job, ReviewReportAvro.SCHEMA$);
 		
 		// configure mapper and reducer
-		job.setMapperClass(ReviewAvroMapper.class);
-		job.setCombinerClass(ReviewAvroCombiner.class);
-		job.setReducerClass(ReviewAvroReducer.class);
+		job.setMapperClass(ReviewAvroInputMapper.class);
+		job.setReducerClass(ReviewAvroOutputReducer.class);
 		
 		// configure keys used between mappers and reducers
-		AvroJob.setMapOutputKeySchema(job, ReviewKeyAvro.SCHEMA$);
-		AvroJob.setMapOutputValueSchema(job, ReviewReportAvro.SCHEMA$);
-//		job.setMapOutputKeyClass(AvroKey.class);
-//		job.setMapOutputValueClass(AvroValue.class);
+		job.setMapOutputKeyClass(ReviewKeyWritable.class);
+		job.setMapOutputValueClass(ReviewWritable.class);
     }
 
 	public static void main(String[] args) throws Exception {
-		int exitCode = ToolRunner.run(new ReviewAvroJob(), args);
+		int exitCode = ToolRunner.run(new ReviewAvroInputOutputJob(), args);
 		System.exit(exitCode);
 	}
 }
