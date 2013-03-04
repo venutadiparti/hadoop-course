@@ -33,12 +33,14 @@ public class SequenceFileReader extends Configured implements Tool {
             readerLoop: while (reader.next(key, value)) {
                 printToScreen(key, value);
                 i++;
-                if (i > maxRecordsToRead) {
+                if (i >= maxRecordsToRead) {
                     break readerLoop;
                 }
             }
         } finally {
-            reader.close();
+            if ( reader!=null){
+                reader.close();
+            }
         }
 
         return 0;
