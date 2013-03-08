@@ -17,7 +17,7 @@ import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class AvroReader extends Configured implements Tool {
+public class AvroReaderSpecific extends Configured implements Tool {
 
     @Override
     public int run(String[] args) throws Exception {
@@ -58,7 +58,7 @@ public class AvroReader extends Configured implements Tool {
     }
 
     public static void main(String[] args) throws Exception {
-        int code = ToolRunner.run(new AvroReader(), args);
+        int code = ToolRunner.run(new AvroReaderSpecific(), args);
         System.exit(code);
     }
 }

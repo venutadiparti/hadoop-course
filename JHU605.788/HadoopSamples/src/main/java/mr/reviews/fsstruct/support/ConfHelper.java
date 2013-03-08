@@ -28,6 +28,7 @@ public class ConfHelper {
         Path path =  new Path(input);
         FileSystem fs = FileSystem.get(conf);
         Validate.isTrue(fs.globStatus(path).length>0, "The input directory [" + path + "] does not exist");
+        LOG.info("Input is [{}]", path);
         return path;
     }
 
