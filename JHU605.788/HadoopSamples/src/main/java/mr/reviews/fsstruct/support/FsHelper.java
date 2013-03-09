@@ -12,6 +12,7 @@ import org.apache.hadoop.io.IOUtils;
 public class FsHelper {
 
     private final FileSystem fs;
+    @SuppressWarnings("unused")
     private final Configuration conf; 
     public FsHelper(Configuration conf) throws IOException{
         Validate.notNull(conf);

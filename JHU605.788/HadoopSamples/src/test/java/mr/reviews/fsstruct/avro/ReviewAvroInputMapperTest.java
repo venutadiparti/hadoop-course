@@ -1,4 +1,4 @@
-package mr.wordcount;
+package mr.reviews.fsstruct.avro;
 
 import java.io.IOException;
 import java.util.Arrays;
