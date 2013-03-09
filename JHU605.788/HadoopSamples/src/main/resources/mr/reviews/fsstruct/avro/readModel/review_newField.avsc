@@ -1,5 +1,5 @@
 {
-	"name": "ReviewAvroV2",
+	"name": "ReviewAvro",
 	"type": "record",
 	"namespace": "mr.reviews.fsstruct.avro.model",
 	"fields": [
