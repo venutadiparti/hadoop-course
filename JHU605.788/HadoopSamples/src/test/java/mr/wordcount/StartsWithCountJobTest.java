@@ -1,5 +1,8 @@
 package mr.wordcount;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -9,9 +12,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-public class StartsWithCountJobTests {
+public class StartsWithCountJobTest {
     
     private File inputFile =
       new File("./target/test/input.txt");
@@ -26,7 +28,7 @@ public class StartsWithCountJobTests {
     }
     
     @Test
-    public void testRun() throws Exception {
+    public void testWithLocalJobRunner() throws Exception {
       Configuration conf = new Configuration();
       conf.set("mapreduce.framework.name", "local");
       conf.set("fs.default.name", "file:///");
