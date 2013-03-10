@@ -33,7 +33,6 @@ public class StartsWithCountMapper_DistCacheTest {
     
     @Test
     public void test() {
-        System.out.println("----->" + new File("./").getAbsolutePath());
         LongWritable inputKey = new LongWritable();
         Text inputValue = new Text("Must process this line of text");
         new MapDriver<LongWritable, Text, Text, IntWritable>()

@@ -2,17 +2,12 @@ package mr.wordcount;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -25,6 +20,25 @@ import org.mockito.stubbing.Answer;
 
 public class StartsWithCountMapperTest {
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Test
+    public void processLineOfText() throws IOException, InterruptedException{
+        StartsWithCountMapper underTest = new StartsWithCountMapper();
+        LongWritable inputKey = new LongWritable();
+        Text inputValue = new Text("Must process this line of text");
+        Context context = mock(Context.class);
+        List<KeyValContainer> collected = setupOutputCollector(context);
+        underTest.map(inputKey, inputValue, context);
+        
+        assertEquals(6, collected.size());
+        assertKeyVal(collected.get(0), "M", 1);
+        assertKeyVal(collected.get(1), "p", 1);
+        assertKeyVal(collected.get(2), "t", 1);
+        assertKeyVal(collected.get(3), "l", 1);
+        assertKeyVal(collected.get(4), "o", 1);
+        assertKeyVal(collected.get(5), "t", 1);
+    }
+    
     class KeyValContainer{
         public KeyValContainer(Text key, IntWritable value) {
             this.key = key;
@@ -35,12 +49,8 @@ public class StartsWithCountMapperTest {
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    @Test
-    public void processLineOfText() throws IOException, InterruptedException{
-        StartsWithCountMapper underTest = new StartsWithCountMapper();
-        LongWritable inputKey = new LongWritable();
-        Text inputValue = new Text("Must process this line of text");
-        Context context = mock(Context.class, RETURNS_DEEP_STUBS);
+    private List<KeyValContainer> setupOutputCollector(Context context) throws IOException,
+            InterruptedException {
         final List<KeyValContainer> collected = new ArrayList<KeyValContainer>();
         Answer ans = new Answer() {
             @Override
@@ -54,16 +64,8 @@ public class StartsWithCountMapperTest {
             }
         };
         doAnswer(ans).when(context).write(anyObject(), anyObject());
-
-        underTest.map(inputKey, inputValue, context);
         
-        assertEquals(6, collected.size());
-        assertKeyVal(collected.get(0), "M", 1);
-        assertKeyVal(collected.get(1), "p", 1);
-        assertKeyVal(collected.get(2), "t", 1);
-        assertKeyVal(collected.get(3), "l", 1);
-        assertKeyVal(collected.get(4), "o", 1);
-        assertKeyVal(collected.get(5), "t", 1);
+        return collected;
     }
     
     private void assertKeyVal(KeyValContainer container, String expectedK, int expectedV){

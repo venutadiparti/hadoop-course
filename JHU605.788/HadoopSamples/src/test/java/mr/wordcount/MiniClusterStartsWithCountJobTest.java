@@ -46,7 +46,7 @@ public class MiniClusterStartsWithCountJobTest {
     }
 
     @Test
-    public void testWithLocalJobRunner() throws Exception {
+    public void testWithMiniCluster() throws Exception {
         FsHelper fsHelper = new FsHelper(dfsCluster.getConfiguration(0));
         Path input = new Path("/tests/MiniClusterStartsWithCountJobTest/input/in.txt");
         Path output = new Path("/tests/MiniClusterStartsWithCountJobTest/output/");

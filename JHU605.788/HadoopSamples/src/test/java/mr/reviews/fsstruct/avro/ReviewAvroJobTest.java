@@ -38,20 +38,7 @@ public class ReviewAvroJobTest {
     private Configuration conf;
     @Before
     public void setUpTest() throws IOException {
-        if (inputFile.exists()){
-            FileUtils.forceDelete(inputFile);
-        }
-        if (output.exists()){
-            FileUtils.forceDelete(output);
-        }
-        if (!inputFile.getParentFile().exists()){
-            inputFile.getParentFile().mkdirs();
-            inputFile.createNewFile();
-        }
-        if (!output.getParentFile().exists()){
-            output.getParentFile().mkdirs();
-        }
-        
+        prepareLocalLocations();
         conf = new Configuration();
         conf.set("mapreduce.framework.name", "local");
         conf.set("fs.default.name", "file:///");
@@ -74,7 +61,6 @@ public class ReviewAvroJobTest {
         
         List<ReviewReportAvro> resultReports = getResultReports(new File(output, "part-r-00000.avro"));
         validateOutputSet(resultReports);
-        
     }
     
     private void validateOutputSet(List<ReviewReportAvro> resultReports) {
@@ -146,6 +132,22 @@ public class ReviewAvroJobTest {
         }
         
         return result;
+    }
+    
+    private void prepareLocalLocations() throws IOException {
+        if (inputFile.exists()){
+            FileUtils.forceDelete(inputFile);
+        }
+        if (output.exists()){
+            FileUtils.forceDelete(output);
+        }
+        if (!inputFile.getParentFile().exists()){
+            inputFile.getParentFile().mkdirs();
+            inputFile.createNewFile();
+        }
+        if (!output.getParentFile().exists()){
+            output.getParentFile().mkdirs();
+        }
     }
 
 }
