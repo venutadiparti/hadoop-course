@@ -50,7 +50,7 @@
 			<classifier>hadoop2</classifier>
 		</dependency>
 		
-		<!-- TEST -->
+		<!-- START: TEST DEPENDENCIES -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -64,6 +64,33 @@
 			<classifier>hadoop2</classifier>
 			<scope>test</scope> 
 		</dependency>
+		
+		<!-- START: Mini Clusters Dependencies -->
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-hdfs</artifactId>
+			<version>${cdh_version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope> 
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${cdh_version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope> 
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-yarn-server-tests</artifactId>
+			<version>${cdh_version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope> 
+		</dependency>
+		<!-- END: Mini Clusters Dependencies -->
+		
+		<!-- END: TEST DEPENDENCIES -->
+		 
 	</dependencies>
 
 
