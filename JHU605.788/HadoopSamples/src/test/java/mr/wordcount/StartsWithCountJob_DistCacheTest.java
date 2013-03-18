@@ -40,10 +40,11 @@ public class StartsWithCountJob_DistCacheTest {
       Configuration conf = new Configuration();
       conf.set("mapreduce.framework.name", "local");
       conf.set("fs.default.name", "file:///");
-        
+      DistributedCache.addCacheFile(distCacheFile.toURI(), conf);
+      
       StartsWithCountJob_DistCache underTest = new StartsWithCountJob_DistCache();
       underTest.setConf(conf);
-      DistributedCache.addCacheFile(distCacheFile.toURI(), conf);
+      
         
       int exitCode = underTest.run(
         new String[]{inputFile.getAbsolutePath(),

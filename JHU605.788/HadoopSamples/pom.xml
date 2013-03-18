@@ -50,6 +50,12 @@
 			<classifier>hadoop2</classifier>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase</artifactId>
+			<version>0.94.2-cdh4.2.0</version>
+		</dependency>
+		
 		<!-- START: TEST DEPENDENCIES -->
 		<dependency>
 			<groupId>junit</groupId>
