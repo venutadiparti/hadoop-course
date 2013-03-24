@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<configuration>
+    <property>
+		<name>report.input.path</name>
+		<value>/training/data/reviews-xml/</value>
+	</property>
+</configuration>
