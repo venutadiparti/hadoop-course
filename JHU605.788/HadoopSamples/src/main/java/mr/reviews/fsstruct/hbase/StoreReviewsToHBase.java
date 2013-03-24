@@ -14,16 +14,12 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
 CONF_FILE=$TRAINING_HOME/eclipse/workspace/HadoopSamples/src/main/resources/hbase/ReviewsJob.xml
-HBASE_JAR=$HBASE_HOME/hbase-*.jar
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.hbase.StoreReviewsToHBase -conf $CONF_FILE -libjars $HBASE_JAR
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.hbase.StoreReviewsToHBase -conf $CONF_FILE
  */
 public class StoreReviewsToHBase extends Configured implements Tool{
-    private static Logger LOG = LoggerFactory.getLogger(StoreReviewsToHBase.class);
     public int run(String[] args) throws Exception {
         Job job = Job.getInstance(HBaseConfiguration.create(getConf()), this.getClass().getName());        
         job.setJarByClass(getClass());
@@ -35,8 +31,7 @@ public class StoreReviewsToHBase extends Configured implements Tool{
         EntireFileCombineFileTextInputFormat.addInputPath(job, confHelper.getInput());
         EntireFileCombineFileTextInputFormat.setMaxInputSplitSize(job, 256*1024); // 256kb
         job.setInputFormatClass(EntireFileCombineFileTextInputFormat.class);
-
-        TableMapReduceUtil.addDependencyJars(job);
+       
         job.setMapperClass(StoreReviewToHBaseMapper.class);
         job.setReducerClass(Reducer.class);
         
@@ -46,7 +41,9 @@ public class StoreReviewsToHBase extends Configured implements Tool{
         job.setOutputValueClass(Writable.class);
         job.setNumReduceTasks(0);
         
-        LOG.info("Running the job");
+        // this needs to happen at the end because it will setJarByClass for
+        // various class configured on job such as OutputFormat
+        TableMapReduceUtil.addDependencyJars(job);
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
