@@ -21,7 +21,7 @@ public class StoreReviewToHBaseMapper extends Mapper<NullWritable, BytesWritable
     private final XmlHelper helper = new XmlHelper();
 
     @Override
-    protected void map(NullWritable key, BytesWritable value, Context context) throws IOException, InterruptedException {
+    public void map(NullWritable key, BytesWritable value, Context context) throws IOException, InterruptedException {
         Review review = helper.convert(value.copyBytes());
         Put put = new Put(toBytes(review.getTimestamp() + "_" + review.getUser()));
         put.add(REVIEW_FAMILY_CONTENT, REVIEW_COLUMN_USER, toBytes(review.getUser()));

@@ -27,5 +27,6 @@ put 'HBaseSamples', 'batchExample_row_02', 'columns:col1', 'Row2col1'
 put 'HBaseSamples', 'batchExample_row_02', 'columns:col2', 'Row2col2'
 put 'HBaseSamples', 'batchExample_row_02', 'columns:col3', 'Row2col3'
 
-
+create 'ReviewTable', {NAME=>'reviews',COMPRESSION=>'snappy'}
+create 'ReviewReportTable', {NAME=>'reviewKeywordHits',COMPRESSION=>'snappy'}, {NAME=>'reviewKeywordReport',COMPRESSION=>'snappy'}
 
