@@ -15,7 +15,8 @@ public class DropTableExample {
 		HBaseAdmin admin = new HBaseAdmin(conf);
 		byte [] tableName = toBytes("NewTable");
 		admin.disableTable(tableName);
-		admin.deleteTable(tableName);		
+		admin.deleteTable(tableName);	
+		admin.close();
 	}
 
 }

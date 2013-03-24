@@ -26,6 +26,7 @@ public class CreateTableExample {
 		System.out.println("Creating "+name+" table...");
 		admin.createTable(table);
 		System.out.println("Table "+name+" exist: " + admin.tableExists(tableName)) ;
+		admin.close();
 	}
 
 }
