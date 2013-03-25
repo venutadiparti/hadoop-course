@@ -28,6 +28,7 @@
 
 		<junit_version>4.11</junit_version>
 		<cdh_version>2.0.0-cdh4.1.2</cdh_version>
+		<cdh_hbase_version>0.94.2-cdh4.2.0</cdh_hbase_version>
 		<avro_mapred_version>1.7.3</avro_mapred_version>
 	</properties>
 
@@ -53,7 +54,7 @@
 		<dependency>
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase</artifactId>
-			<version>0.94.2-cdh4.2.0</version>
+			<version>${cdh_hbase_version}</version>
 		</dependency>
 		
 		<!-- START: TEST DEPENDENCIES -->

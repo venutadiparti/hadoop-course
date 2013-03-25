@@ -11,8 +11,6 @@ Statement to create schema:
   create 'ErrorTable', {NAME=>'errors',COMPRESSION=>'snappy'}
  */
 public interface ReviewHBaseSchema {
-    public static byte [] SPLIT = toBytes("-");
-    
     public static String REVIEW_TABLE = "ReviewTable";
 
     public static byte[] REVIEW_FAMILY_CONTENT = toBytes("reviews");
@@ -33,4 +31,5 @@ public interface ReviewHBaseSchema {
     public static byte[] ERROR_FAMILY =  toBytes("errors");
     public static byte[] ERROR_COLUMN_EXCEPTION =  toBytes("exception");
     
+    public static byte [] SPLIT = toBytes("-");
 }

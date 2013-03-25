@@ -21,12 +21,12 @@ public class ReviewsReportByUserKeyword extends Configured implements Tool{
         
         Scan scan = new Scan();
         TableMapReduceUtil.initTableMapperJob(
-                ReviewHBaseSchema.REVIEW_TABLE, 
-                scan, 
-                ReviewsReportByUserKeywordMapper.class, 
-                ReviewKeyWritable.class, Result.class, 
-                job,
-                true);
+                ReviewHBaseSchema.REVIEW_TABLE,  // table name
+                scan,                            // scan
+                ReviewsReportByUserKeywordMapper.class, // mapper
+                ReviewKeyWritable.class, Result.class, // output key and value of map phase
+                job,  // job
+                true); // add dependencies to tasks' CLASSPATH
         
         TableMapReduceUtil.initTableReducerJob(
                 ReviewHBaseSchema.REVIEW_REPORT_TABLE, 
