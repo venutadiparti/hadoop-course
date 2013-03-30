@@ -24,6 +24,11 @@ import org.apache.hadoop.util.ToolRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.avro.AvroWriterGeneric -Dreport.input.path=/training/data/reviews-xml/ -Dreport.output.path=/training/data/nullTests/reviews.avro $TRAINING_HOME/eclipse/workspace/HadoopSamples/src/main/resources/mr/reviews/fsstruct/avro/model/review.avsc
+ *
+ */
 public class AvroWriterGeneric extends Configured implements Tool {
     private static Logger LOG = LoggerFactory.getLogger(AvroWriterGeneric.class);
     @Override
@@ -56,7 +61,7 @@ public class AvroWriterGeneric extends Configured implements Tool {
                 Review review = xmlHelper.convert(bytes);
                 record.put("user", review.getUser());
                 record.put("text", review.getText());
-                record.put("timestamp", review.getTimestamp());
+                record.put("timestamp", null);
                 writer.append(record);
             }
 

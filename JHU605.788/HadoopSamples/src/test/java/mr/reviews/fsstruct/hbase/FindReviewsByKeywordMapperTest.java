@@ -8,6 +8,7 @@ import static mr.reviews.fsstruct.hbase.ReviewHBaseSchema.REVIEW_REPORT_COLUMN_K
 import static mr.reviews.fsstruct.hbase.ReviewHBaseSchema.REVIEW_REPORT_FAMILY_KEYWORDHITS;
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class FindReviewsByKeywordMapperTest {
         List<Pair<NullWritable, Writable>> results = mapD.run();
         assertEquals(1, results.size());
         Put res = (Put)results.get(0).getSecond();
-        assertEquals("where-user1", Bytes.toString(res.getRow()));
+        assertTrue(Bytes.toString(res.getRow()).startsWith("where-user1"));
         assertColumnValue(REVIEW_REPORT_FAMILY_KEYWORDHITS, 
                 REVIEW_REPORT_COLUMN_KEYWORD, keyword, res);
         assertColumnValue(REVIEW_REPORT_FAMILY_KEYWORDHITS, 

@@ -11,6 +11,7 @@ import static org.apache.hadoop.hbase.util.Bytes.toBytes;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang.Validate;
 import org.apache.hadoop.hbase.client.Put;
@@ -42,7 +43,9 @@ public class FindReviewsByKeywordMapper extends TableMapper<NullWritable, Writab
                 byte[] usr = value.getValue(REVIEW_FAMILY_CONTENT, REVIEW_COLUMN_USER);
                 byte[] timestamp = value.getValue(REVIEW_FAMILY_CONTENT, REVIEW_COLUMN_TIMESTAMP);
                 byte[] keywordsAsBytes = toBytes(valueToLookFor);
-                Put put = new Put(Bytes.add(keywordsAsBytes, ReviewHBaseSchema.SPLIT, usr));
+                byte [] keyUsr = Bytes.add(keywordsAsBytes, ReviewHBaseSchema.SPLIT, usr);
+                byte [] uuid = toBytes(UUID.randomUUID().toString());
+                Put put = new Put(Bytes.add(keyUsr, ReviewHBaseSchema.SPLIT, uuid));
 
                 byte [] outFamily = REVIEW_REPORT_FAMILY_KEYWORDHITS;
                 put.add(outFamily, REVIEW_REPORT_COLUMN_KEYWORD, keywordsAsBytes);

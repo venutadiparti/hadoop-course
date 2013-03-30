@@ -26,10 +26,8 @@ public class ReviewsReportByUserKeywordReducer extends TableReducer<ReviewKeyWri
         Put put = new Put(Bytes.add(toBytes(key.getKeyword()), 
                 ReviewHBaseSchema.SPLIT, toBytes(key.getAuthor())));
         int reviewCount = 0;
-        for (Result review : reviews){
-            put.add(REVIEW_REPORT_FAMILY_HITSREPORT, 
-                    Bytes.add(REVIEW_COLUMN_USER, toBytes(reviewCount)), 
-                    review.getValue(REVIEW_FAMILY_CONTENT, REVIEW_COLUMN_USER));
+        
+        for (Result review : reviews){          
             put.add(REVIEW_REPORT_FAMILY_HITSREPORT, 
                     Bytes.add(REVIEW_COLUMN_TEXT, toBytes(reviewCount)), 
                     review.getValue(REVIEW_FAMILY_CONTENT, REVIEW_COLUMN_TEXT));
@@ -38,6 +36,8 @@ public class ReviewsReportByUserKeywordReducer extends TableReducer<ReviewKeyWri
                     review.getValue(REVIEW_FAMILY_CONTENT, REVIEW_COLUMN_TIMESTAMP));
             reviewCount++;
         }
+        put.add(REVIEW_REPORT_FAMILY_HITSREPORT, 
+                REVIEW_COLUMN_USER, toBytes(key.getAuthor()));
         put.add(REVIEW_REPORT_FAMILY_HITSREPORT, 
                 REVIEW_REPORT_COLUMN_NUMBER_OF_REVIEWS, toBytes(reviewCount));
         context.write(NullWritable.get(), put);
