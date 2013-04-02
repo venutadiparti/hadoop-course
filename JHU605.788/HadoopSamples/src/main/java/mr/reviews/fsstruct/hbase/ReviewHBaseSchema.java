@@ -9,6 +9,8 @@ Statement to create schema:
   create 'ReviewReportTable', {NAME=>'reviewKeywordHits',COMPRESSION=>'snappy'}, {NAME=>'reviewKeywordReport',COMPRESSION=>'snappy'}
   
   create 'ErrorTable', {NAME=>'errors',COMPRESSION=>'snappy'}
+  
+  create 'ReviewJoinedTable', {NAME=>'reviews',COMPRESSION=>'snappy'}
  */
 public interface ReviewHBaseSchema {
     public static String REVIEW_TABLE = "ReviewTable";
@@ -32,4 +34,8 @@ public interface ReviewHBaseSchema {
     public static byte[] ERROR_COLUMN_EXCEPTION =  toBytes("exception");
     
     public static byte [] SPLIT = toBytes("-");
+    
+    // Join example
+    public static String REVIEW_JOIN_TABLE = "ReviewJoinedTable";
+    public static byte[] REVIEW_COLUMN_STATE = toBytes("state");
 }
