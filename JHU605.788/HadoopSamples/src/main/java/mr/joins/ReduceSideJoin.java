@@ -12,8 +12,8 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.joins.ReduceSideJoin <user_posts_path> <users_likes_path> <output_path>
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.joins.ReduceSideJoin /data/users/user-posts.txt /data/users/user-likes.txt /training/playArea/reduceSideJoin/
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReduceSideJoin <user_posts_path> <users_likes_path> <output_path>
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReduceSideJoin /data/users/user-posts.txt /data/users/user-likes.txt /training/playArea/reduceSideJoin/
  */
 public class ReduceSideJoin extends Configured implements Tool{
     
