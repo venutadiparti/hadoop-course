@@ -18,6 +18,7 @@ public class ReduceSideJoinReducer extends Reducer<Text, Text, Text, Text> {
     private final static String JOIN_LEFT_OUTER = "leftOuter";
     private final static String JOIN_RIGHT_OUTER = "rightOuter";
     private final static String JOIN_FULL_OUTER = "fullOuter";
+    private final static String JOIN_ANTI = "anti";
     
     private MultipleOutputs<Text, Text> out;
     @Override
@@ -47,6 +48,7 @@ public class ReduceSideJoinReducer extends Reducer<Text, Text, Text, Text> {
         leftOuterJoin(context);
         rightOuterJoin(context);
         fullOuterJoin(context);
+        antiJoin(context);
     }
 
     private void innerJoin(Context context) throws IOException, InterruptedException {
@@ -107,5 +109,17 @@ public class ReduceSideJoinReducer extends Reducer<Text, Text, Text, Text> {
                 out.write(empty, r, JOIN_FULL_OUTER);
             }
         }
+    }
+    
+    private void antiJoin(Context context) throws IOException, InterruptedException {
+        if (leftSide.isEmpty() || rightSide.isEmpty()){
+            context.getCounter(GROUP_NAME, JOIN_ANTI).increment(1);
+            for (Text l : leftSide){
+                out.write(l, empty, JOIN_ANTI);
+            }
+            for (Text r : rightSide){
+                out.write(empty,r, JOIN_ANTI);
+            }
+        } 
     }
 }
