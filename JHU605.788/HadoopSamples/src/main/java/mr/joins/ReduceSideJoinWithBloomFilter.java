@@ -1,4 +1,4 @@
-package mr.reviews.joins;
+package mr.joins;
 
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;

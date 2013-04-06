@@ -1,4 +1,4 @@
-package mr.reviews.joins;
+package mr.joins;
 
 import mr.reviews.fsstruct.hbase.ReviewHBaseSchema;
 

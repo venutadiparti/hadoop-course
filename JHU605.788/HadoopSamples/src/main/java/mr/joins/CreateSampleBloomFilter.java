@@ -1,4 +1,4 @@
-package mr.reviews.joins;
+package mr.joins;
 
 import java.io.DataOutputStream;
 import java.io.File;

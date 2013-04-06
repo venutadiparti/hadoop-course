@@ -1,4 +1,4 @@
-package mr.reviews.joins;
+package mr.joins;
 
 import static mr.reviews.fsstruct.hbase.ReviewHBaseSchema.REVIEW_COLUMN_STATE;
 import static mr.reviews.fsstruct.hbase.ReviewHBaseSchema.REVIEW_COLUMN_TEXT;

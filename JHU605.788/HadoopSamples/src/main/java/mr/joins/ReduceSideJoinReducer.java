@@ -1,4 +1,4 @@
-package mr.reviews.joins;
+package mr.joins;
 
 import java.io.IOException;
 import java.util.ArrayList;
