@@ -17,7 +17,6 @@ yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReduceSideJoin /data/users/user-p
  */
 public class ReduceSideJoin extends Configured implements Tool{
     
-    
     public int run(String[] args) throws Exception {
         Job job = Job.getInstance(getConf(), this.getClass().getName());        
         job.setJarByClass(getClass());

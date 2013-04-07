@@ -38,7 +38,6 @@ public class ReduceSideJoinWithSecondarySort extends Configured implements Tool{
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
         
-//        job.setSortComparatorClass(ReduceSideKeyComparator.class);
         job.setPartitionerClass(ReduceSidePartitioner.class);
         job.setGroupingComparatorClass(ReduceSideGroupComparator.class);
         

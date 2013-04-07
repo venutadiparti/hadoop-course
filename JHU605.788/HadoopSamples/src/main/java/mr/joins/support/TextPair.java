@@ -47,6 +47,4 @@ public class TextPair implements WritableComparable<TextPair>{
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
-    
-    
 }

@@ -13,5 +13,4 @@ public class CompositeJoinMapper extends Mapper<Text, TupleWritable, Text, Text>
             throws IOException, InterruptedException {
         context.write((Text)value.get(0), (Text)value.get(1));
     }
-
 }

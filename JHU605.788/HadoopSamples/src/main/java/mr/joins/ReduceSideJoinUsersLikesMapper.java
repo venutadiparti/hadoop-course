@@ -16,5 +16,4 @@ public class ReduceSideJoinUsersLikesMapper extends Mapper<LongWritable, Text, T
         outputValue.set("R" + value.toString());
         context.write(joinKey, outputValue);
     }
-
 }
