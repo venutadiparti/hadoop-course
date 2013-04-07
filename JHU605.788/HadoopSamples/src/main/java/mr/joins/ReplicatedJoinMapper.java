@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.Validate;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable;
@@ -24,16 +23,15 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Writable;
 
+import utils.ConfUtil;
+
 public class ReplicatedJoinMapper extends TableMapper<NullWritable, Writable> {
     public final static String PROP_JOIN_FILE = "replicated.join.file";
     private final Map<String,byte[]> userToHotel = new HashMap<String,byte[]>();
 
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
-        String joinFileName= context.getConfiguration().get(PROP_JOIN_FILE);
-        Validate.notNull(joinFileName, "Must provide join file name via [" + PROP_JOIN_FILE + "] property");
-        File joinFile = new File(joinFileName);
-        Validate.isTrue(joinFile.exists(), "Must place [" + joinFileName + "] on Distributed Cache");
+        File joinFile = ConfUtil.getFile(context.getConfiguration(), PROP_JOIN_FILE);
         FileReader reader = new FileReader(joinFile);
         BufferedReader bufferedReader = null;
         try {

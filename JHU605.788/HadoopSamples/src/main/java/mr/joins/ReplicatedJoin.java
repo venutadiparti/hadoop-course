@@ -14,7 +14,7 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 /**
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.joins.ReplicatedJoin -Dreplicated.join.file=userToState.txt -libjars $PLAY_AREA/data/userToState.txt
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReplicatedJoin -Dreplicated.join.file=userToState.txt -libjars $PLAY_AREA/data/userToState.txt
  */
 public class ReplicatedJoin extends Configured implements Tool{
     public int run(String[] args) throws Exception {
