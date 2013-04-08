@@ -1,4 +1,4 @@
-package mr.wordcount;
+package mr.chaining.tasks;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class StartsWithCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class SumReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
     private IntWritable outValue = new IntWritable(); 
     @Override
     protected void reduce(Text token, Iterable<IntWritable> counts, Context context) throws IOException,
