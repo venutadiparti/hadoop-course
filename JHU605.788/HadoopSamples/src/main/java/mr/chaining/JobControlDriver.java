@@ -2,7 +2,9 @@ package mr.chaining;
 
 import java.util.Arrays;
 
-import mr.chaining.support.SampleJobFactory;
+import static mr.chaining.support.SampleJobFactory.createGrep;
+import static mr.chaining.support.SampleJobFactory.createWordCount;
+import static mr.chaining.support.SampleJobFactory.randomTextWriter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.hadoop.conf.Configuration;
@@ -35,12 +37,12 @@ public class JobControlDriver extends Configured implements Tool {
         Path grepOutput = new Path(workingDir, "grep_result");
 
         JobControl control = new JobControl("JobControl-Example");
-        ControlledJob genDataStep = new ControlledJob(SampleJobFactory.randomTextWriter(conf, "job1-WriteText",
+        ControlledJob genDataStep = new ControlledJob(randomTextWriter(conf, "job1-WriteText",
                 intermediateOutput), null); // dependent jobs
-        ControlledJob countStep = new ControlledJob(SampleJobFactory.createWordCount(conf, "job2-WordCount",
+        ControlledJob countStep = new ControlledJob(createWordCount(conf, "job2-WordCount",
                 intermediateOutput, countOutput), Arrays.asList(genDataStep)); // dependent
                                                                                // jobs
-        ControlledJob grepStep = new ControlledJob(SampleJobFactory.createGrep(conf, "job3-Grep", intermediateOutput, grepOutput, ".*au.*"),
+        ControlledJob grepStep = new ControlledJob(createGrep(conf, "job3-Grep", intermediateOutput, grepOutput, ".*au.*"),
                 Arrays.asList(genDataStep)); // dependent
                                                                                // jobs
 

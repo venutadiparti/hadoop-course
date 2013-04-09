@@ -2,7 +2,9 @@ package mr.chaining;
 
 import java.io.IOException;
 
-import mr.chaining.support.SampleJobFactory;
+import static mr.chaining.support.SampleJobFactory.createGrep;
+import static mr.chaining.support.SampleJobFactory.createWordCount;
+import static mr.chaining.support.SampleJobFactory.randomTextWriter;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -31,13 +33,13 @@ public class SimpleParallelDriver extends Configured implements Tool {
         Path countOutput = new Path(workingDir, "count_result");
         Path grepOutput = new Path(workingDir, "grep_result");
         
-        Job genText = SampleJobFactory.randomTextWriter(conf, "job1-WriteText", intermediateOutput);
+        Job genText = randomTextWriter(conf, "job1-WriteText", intermediateOutput);
         boolean status = genText.waitForCompletion(true);
         
         if ( status ){
-            Job countWords = SampleJobFactory.createWordCount(conf, "job2-WordCount", intermediateOutput, countOutput);
+            Job countWords = createWordCount(conf, "job2-WordCount", intermediateOutput, countOutput);
             countWords.submit();
-            Job grep = SampleJobFactory.createGrep(conf, "job3-Grep", intermediateOutput, grepOutput, ".*au.*");
+            Job grep = createGrep(conf, "job3-Grep", intermediateOutput, grepOutput, ".*au.*");
             grep.submit();
             
             while(!countWords.isComplete() || !grep.isComplete()){
