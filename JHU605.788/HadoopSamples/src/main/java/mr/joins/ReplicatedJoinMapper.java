@@ -27,7 +27,7 @@ import utils.ConfUtil;
 
 public class ReplicatedJoinMapper extends TableMapper<NullWritable, Writable> {
     public final static String PROP_JOIN_FILE = "replicated.join.file";
-    private final Map<String,byte[]> userToHotel = new HashMap<String,byte[]>();
+    private final Map<String,byte[]> userToState = new HashMap<String,byte[]>();
 
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
@@ -39,7 +39,7 @@ public class ReplicatedJoinMapper extends TableMapper<NullWritable, Writable> {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String [] split = line.split(",");
-                userToHotel.put(split[0], toBytes(split[1]));
+                userToState.put(split[0], toBytes(split[1]));
             }
             
         } finally {
@@ -52,13 +52,13 @@ public class ReplicatedJoinMapper extends TableMapper<NullWritable, Writable> {
     public void map(ImmutableBytesWritable key, Result value, Context context) throws IOException,
             InterruptedException {
         String user = Bytes.toString(value.getValue(REVIEW_FAMILY_CONTENT,REVIEW_COLUMN_USER));
-        byte [] hotel = userToHotel.get(user);
-        if ( hotel != null ){
+        byte [] state = userToState.get(user);
+        if ( state != null ){
             Put put = new Put(value.getRow());
             add(put,value,REVIEW_FAMILY_CONTENT,REVIEW_COLUMN_TEXT);
             add(put,value,REVIEW_FAMILY_CONTENT,REVIEW_COLUMN_USER);
             add(put,value,REVIEW_FAMILY_CONTENT,REVIEW_COLUMN_TIMESTAMP);
-            put.add(REVIEW_FAMILY_CONTENT,REVIEW_COLUMN_STATE,hotel);
+            put.add(REVIEW_FAMILY_CONTENT,REVIEW_COLUMN_STATE,state);
             context.write(NullWritable.get(), put);
         }
     }

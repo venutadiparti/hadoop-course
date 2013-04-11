@@ -23,7 +23,7 @@ public class MinIntValueMapper extends Mapper<Text, IntWritable, Text, IntWritab
        if ( value.get() >= minValue){
            context.write(key, value);           
        } else {
-           log.debug("Filtred with key [{}] because value [{}] is too low", key, value);
+           log.debug("Filtered with key [{}] because value [{}] is too low", key, value);
        }
     }
 }

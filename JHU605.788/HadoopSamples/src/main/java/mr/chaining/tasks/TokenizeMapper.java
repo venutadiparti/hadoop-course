@@ -20,7 +20,7 @@ public class TokenizeMapper extends Mapper<LongWritable, Text, Text, IntWritable
         while (tokenizer.hasMoreTokens()) {
             reusableText.set(tokenizer.nextToken());
             context.write(reusableText, countOne);
-            log.debug("Emiting key [{}]", reusableText);
+            log.debug("Emitting key [{}]", reusableText);
         }
     }
 }
