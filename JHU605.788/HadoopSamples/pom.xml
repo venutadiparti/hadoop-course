@@ -25,11 +25,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<play_area>/home/hadoop/Training/play_area</play_area>
-
+		<pig_scripts_dir>${play_area}/pig/scripts-samples</pig_scripts_dir>
+		
 		<junit_version>4.11</junit_version>
 		<cdh_version>2.0.0-cdh4.1.2</cdh_version>
 		<cdh_hbase_version>0.94.2-cdh4.2.0</cdh_hbase_version>
 		<avro_mapred_version>1.7.3</avro_mapred_version>
+		<pig_version>0.10.0-cdh4.1.2</pig_version>
 	</properties>
 
 	<dependencies>
@@ -43,6 +45,12 @@
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-client</artifactId>
 			<version>${cdh_version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pig</groupId>
+			<artifactId>pig</artifactId>
+			<version>${pig_version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -149,6 +157,27 @@
 								</artifactItem>
 							</artifactItems>
 
+						</configuration>
+					</execution>					
+				</executions>
+			</plugin>
+				<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<executions>					
+					<execution>
+						<id>copy-pig-scripts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${pig_scripts_dir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/pig/</directory>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
