@@ -8,7 +8,12 @@
       <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/> 
     </layout> 
   </appender> 
-
+  <logger name="org.apache.pig.backend.hadoop.hbase.HBaseStorage">
+    <level value="warn"/> 
+  </logger>
+  <logger name="org.apache.hadoop.conf.Configuration">
+    <level value="error"/> 
+  </logger>
   <root> 
     <priority value ="info" /> 
     <appender-ref ref="console" /> 
