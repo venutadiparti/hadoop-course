@@ -4,6 +4,7 @@ import org.apache.crunch.PCollection;
 import org.apache.crunch.PTable;
 import org.apache.crunch.Pair;
 import org.apache.crunch.Pipeline;
+import org.apache.crunch.PipelineResult;
 import org.apache.crunch.impl.mr.MRPipeline;
 import org.apache.crunch.lib.Join;
 import org.apache.crunch.types.writable.Writables;
@@ -41,7 +42,8 @@ public class JoinPostsAndLikesCrunch extends Configured implements Tool {
                     ": [" + joinedRecord.second().first() + "] and [" + 
                             joinedRecord.second().second() + "]");
         }
-        return 0;
+        PipelineResult res = pipeline.done();
+        return res.succeeded() ? 0 : 1;
     }
 
     public static void main(String[] args) throws Exception {
