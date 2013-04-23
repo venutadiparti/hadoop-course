@@ -84,6 +84,12 @@
 			<version>${crunch_version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.crunch</groupId>
+			<artifactId>crunch-hbase</artifactId>
+			<version>${crunch_version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- START: TEST DEPENDENCIES -->
 		<dependency>
 			<groupId>junit</groupId>
