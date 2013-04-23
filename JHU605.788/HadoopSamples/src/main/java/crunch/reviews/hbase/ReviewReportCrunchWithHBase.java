@@ -46,7 +46,7 @@ public class ReviewReportCrunchWithHBase extends Configured implements Tool {
         HBaseSourceTarget source = new HBaseSourceTarget(ReviewHBaseSchema.REVIEW_TABLE, scan);
         PTable<ImmutableBytesWritable, Result> inputReviews = pipeline.read(source);
         PCollection<Put> puts = inputReviews.values().parallelDo(
-                "find-reviews", new FindReviewsDoFn(valuesToLookFor), 
+                "find-reviews", new FindReviewsHBaseDoFn(valuesToLookFor), 
                 Writables.writables(Put.class));
 
         

@@ -31,11 +31,11 @@ public class JoinPostsAndLikesCrunch extends Configured implements Tool {
 
         PTable<String,String> posts = postsLines.parallelDo(
                 "prepare posts", new ExtractPostsDoFN(),
-                postsLines.getTypeFamily().tableOf(Writables.strings(), Writables.strings()));
+                Writables.tableOf(Writables.strings(), Writables.strings()));
 
         PTable<String,String> likes = likesLines.parallelDo(
                 "prepare likes", new ExtractPostsDoFN(),
-                likesLines.getTypeFamily().tableOf(Writables.strings(), Writables.strings()));
+                Writables.tableOf(Writables.strings(), Writables.strings()));
         
         PTable<String,Pair<String,String>> joined = Join.join(posts, likes);
         for ( Pair<String,Pair<String,String>> joinedRecord : joined.materialize()){

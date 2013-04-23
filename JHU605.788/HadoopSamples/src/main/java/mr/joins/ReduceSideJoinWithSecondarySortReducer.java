@@ -53,6 +53,7 @@ public class ReduceSideJoinWithSecondarySortReducer extends Reducer<TextPair, Te
         protected ReduceSideGroupComparator() {
             super(TextPair.class, true);
         }
+        @SuppressWarnings("rawtypes")
         @Override
         public int compare(WritableComparable a, WritableComparable b) {
             TextPair t1 = (TextPair)a;

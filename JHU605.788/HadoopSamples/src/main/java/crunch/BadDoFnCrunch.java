@@ -15,7 +15,6 @@ import org.apache.hadoop.util.ToolRunner;
  * CRUNCH_JAR=/home/hadoop/.m2/repository/org/apache/crunch/crunch/0.5.0-cdh4.1.3/crunch-0.5.0-cdh4.1.3.jar 
  * HADOOP_CLASSPATH=$CRUNCH_JAR:$HADOOP_CLASSPATH
  * yarn jar $PLAY_AREA/HadoopSamples.jar crunch.BadDoFnCrunch -libjars $CRUNCH_JAR /training/data/books/hamlet.txt /training/playArea/crunch
- * 
  */
 public class BadDoFnCrunch extends Configured implements Tool {
     @Override
