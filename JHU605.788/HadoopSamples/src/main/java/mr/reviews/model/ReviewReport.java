@@ -5,6 +5,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.hadoop.io.Writable;
 
 public class ReviewReport implements Writable{
@@ -76,6 +77,6 @@ public class ReviewReport implements Writable{
     
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }
