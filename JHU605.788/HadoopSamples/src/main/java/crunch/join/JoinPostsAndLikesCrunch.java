@@ -1,4 +1,4 @@
-package crunch;
+package crunch.join;
 
 import org.apache.crunch.PCollection;
 import org.apache.crunch.PTable;
@@ -12,10 +12,11 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+
 /**
  * CRUNCH_JAR=/home/hadoop/.m2/repository/org/apache/crunch/crunch/0.5.0-cdh4.1.3/crunch-0.5.0-cdh4.1.3.jar 
  * HADOOP_CLASSPATH=$CRUNCH_JAR:$HADOOP_CLASSPATH
- * yarn jar $PLAY_AREA/HadoopSamples.jar crunch.JoinPostsAndLikesCrunch -libjars $CRUNCH_JAR  /data/users/user-posts.txt /data/users/user-likes.txt
+ * yarn jar $PLAY_AREA/HadoopSamples.jar crunch.join.JoinPostsAndLikesCrunch -libjars $CRUNCH_JAR  /data/users/user-posts.txt /data/users/user-likes.txt
  * 
  */
 public class JoinPostsAndLikesCrunch extends Configured implements Tool {

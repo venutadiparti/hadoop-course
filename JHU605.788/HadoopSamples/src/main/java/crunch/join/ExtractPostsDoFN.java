@@ -1,4 +1,4 @@
-package crunch;
+package crunch.join;
 
 import org.apache.crunch.DoFn;
 import org.apache.crunch.Emitter;
