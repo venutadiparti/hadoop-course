@@ -1,7 +1,5 @@
 package crunch.reviews.avro;
 
-import static mr.reviews.ReviewJob.PROP_FIND_VALUE;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,23 +7,22 @@ import mr.reviews.fsstruct.avro.model.ReviewAvro;
 import mr.reviews.fsstruct.avro.model.ReviewKeyAvro;
 import mr.reviews.fsstruct.avro.model.ReviewReportAvro;
 
-import org.apache.commons.lang.Validate;
 import org.apache.crunch.DoFn;
 import org.apache.crunch.Emitter;
 import org.apache.crunch.Pair;
 
-public class FindReviewsAndCreateReportsDoFn extends DoFn<ReviewAvro, Pair<ReviewKeyAvro, ReviewReportAvro>> {
+public class FindReviewsDoFn1 extends DoFn<ReviewAvro, Pair<ReviewKeyAvro, ReviewReportAvro>> {
     private static final long serialVersionUID = 1L;
 
     transient private ReviewKeyAvro reviewKey;
     transient private ReviewReportAvro report;
-    transient private List<String> valuesToLookFor;
+    private List<String> valuesToLookFor;
+    public FindReviewsDoFn1(List<String> valuesToLookFor){
+        this.valuesToLookFor = valuesToLookFor;
+    }
     
     @Override
     public void initialize() {
-        String keywords = getConfiguration().get(PROP_FIND_VALUE);
-        Validate.notEmpty(keywords, "You must provide value to find via [" + PROP_FIND_VALUE + "]");
-        valuesToLookFor = Arrays.asList(keywords.split(","));
         reviewKey  = new ReviewKeyAvro();
         report = new ReviewReportAvro();
     }
