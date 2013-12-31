@@ -5,11 +5,28 @@
  */
 package mr.reviews.fsstruct.avro.model;  
 @SuppressWarnings("all")
+@org.apache.avro.specific.AvroGenerated
 public class ReviewAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ReviewAvro\",\"namespace\":\"mr.reviews.fsstruct.avro.model\",\"fields\":[{\"name\":\"user\",\"type\":\"string\"},{\"name\":\"text\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"long\"}]}");
+  public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence user;
   @Deprecated public java.lang.CharSequence text;
   @Deprecated public long timestamp;
+
+  /**
+   * Default constructor.
+   */
+  public ReviewAvro() {}
+
+  /**
+   * All-args constructor.
+   */
+  public ReviewAvro(java.lang.CharSequence user, java.lang.CharSequence text, java.lang.Long timestamp) {
+    this.user = user;
+    this.text = text;
+    this.timestamp = timestamp;
+  }
+
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
@@ -115,15 +132,15 @@ public class ReviewAvro extends org.apache.avro.specific.SpecificRecordBase impl
     private Builder(mr.reviews.fsstruct.avro.model.ReviewAvro other) {
             super(mr.reviews.fsstruct.avro.model.ReviewAvro.SCHEMA$);
       if (isValidValue(fields()[0], other.user)) {
-        this.user = (java.lang.CharSequence) data().deepCopy(fields()[0].schema(), other.user);
+        this.user = data().deepCopy(fields()[0].schema(), other.user);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.text)) {
-        this.text = (java.lang.CharSequence) data().deepCopy(fields()[1].schema(), other.text);
+        this.text = data().deepCopy(fields()[1].schema(), other.text);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.timestamp)) {
-        this.timestamp = (java.lang.Long) data().deepCopy(fields()[2].schema(), other.timestamp);
+        this.timestamp = data().deepCopy(fields()[2].schema(), other.timestamp);
         fieldSetFlags()[2] = true;
       }
     }

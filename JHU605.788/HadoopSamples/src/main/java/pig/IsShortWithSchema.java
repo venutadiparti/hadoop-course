@@ -17,7 +17,7 @@ public class IsShortWithSchema extends FilterFunc {
 
 	@Override
 	public Boolean exec(Tuple tuple) throws IOException {
-		if (tuple == null || tuple.isNull() || tuple.size() == 0) {
+		if (tuple == null || tuple.isNull(0)) {
 			return false;
 		}
 		Object obj = tuple.get(0);

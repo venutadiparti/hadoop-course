@@ -14,6 +14,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
@@ -56,7 +57,7 @@ public class ReviewAvroInputOutputJob extends Configured implements Tool {
         // **********************************************
 		
 		AvroKeyOutputFormat.setCompressOutput(job, true);
-		jobConf.set(AvroJob.CONF_OUTPUT_CODEC, CodecFactory.snappyCodec().toString());
+		jobConf.set(FileOutputFormat.COMPRESS_CODEC, CodecFactory.snappyCodec().toString());
 		job.setOutputKeyClass(ReviewAvro.class);
         job.setOutputValueClass(NullWritable.class);
         AvroJob.setOutputKeySchema(job, ReviewReportAvro.SCHEMA$);

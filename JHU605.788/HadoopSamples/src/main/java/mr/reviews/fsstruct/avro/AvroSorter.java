@@ -19,6 +19,7 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.slf4j.Logger;
@@ -76,7 +77,7 @@ public class AvroSorter extends Configured implements Tool {
         AvroKeyOutputFormat.setOutputPath(job, to);
         
         AvroKeyOutputFormat.setCompressOutput(job, true);
-        jobConf.set(AvroJob.CONF_OUTPUT_CODEC, CodecFactory.snappyCodec().toString());
+        jobConf.set(FileOutputFormat.COMPRESS_CODEC, CodecFactory.snappyCodec().toString());
         AvroJob.setOutputKeySchema(job, schema);
         
         // sort mapper and reducer

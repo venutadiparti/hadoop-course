@@ -1,5 +1,6 @@
 package mr.wordcount;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import org.junit.Test;
 public class StartsWithCountReducerTest {
 
     @Test
-    public void testSum() {
+    public void testSum() throws IOException {
         Text inputKey = new Text("s");
         List<IntWritable> inputValue = Arrays.asList(
                 new IntWritable(5), new IntWritable(5), new IntWritable(8));
