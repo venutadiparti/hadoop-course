@@ -1,33 +1,12 @@
 package examples;
 
-import compression.CompareCompression;
-import compression.ReviewJob_withCompression;
-import compression.SimpleCompression;
-import crunch.StartsWithCountCrunch;
-import crunch.join.JoinPostsAndLikesCrunch;
-import crunch.reviews.avro.ReviewReportCrunch;
-import crunch.reviews.avro.ReviewReportCrunch1;
-import crunch.reviews.hbase.ReviewReportCrunchWithHBase;
 import hdfs.*;
-import mr.chaining.JobControlDriver;
-import mr.chaining.SimpleLinearDriver;
-import mr.chaining.SimpleParallelDriver;
-import mr.chaining.TaskChainingExample;
 import mr.reviews.ReviewJob;
 import mr.reviews.fsstruct.SimpleTextXmlJob;
 import mr.reviews.fsstruct.SimpleTextXmlJob_CombineFileInputFormat;
-import mr.reviews.fsstruct.mf.MapFileFix;
 import mr.reviews.fsstruct.seq.ReviewSequenceFileJob;
 import mr.wordcount.*;
 import org.apache.hadoop.util.ProgramDriver;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
 
 public class ExamplesDriver {
     public static void main(String argv[]) throws Exception {
