@@ -1,9 +1,24 @@
 package examples;
 
+import compression.CompareCompression;
+import compression.ReviewJob_withCompression;
+import compression.SimpleCompression;
+import crunch.StartsWithCountCrunch;
+import crunch.join.JoinPostsAndLikesCrunch;
+import crunch.reviews.avro.ReviewReportCrunch;
+import crunch.reviews.avro.ReviewReportCrunch1;
+import crunch.reviews.hbase.ReviewReportCrunchWithHBase;
 import hdfs.*;
+import mr.chaining.JobControlDriver;
+import mr.chaining.SimpleLinearDriver;
+import mr.chaining.SimpleParallelDriver;
+import mr.chaining.TaskChainingExample;
 import mr.reviews.ReviewJob;
 import mr.reviews.fsstruct.SimpleTextXmlJob;
 import mr.reviews.fsstruct.SimpleTextXmlJob_CombineFileInputFormat;
+import mr.reviews.fsstruct.mf.MapFileFix;
+import mr.reviews.fsstruct.seq.ReviewSequenceFileJob;
+import mr.wordcount.*;
 import org.apache.hadoop.util.ProgramDriver;
 
 import java.io.File;
@@ -26,8 +41,12 @@ public class ExamplesDriver {
                 SimpleLs.class, WriteToFile.class};
 
         Class<?>[] mr = {
+                StartsWithCountJob.class,StartsWithCountJob_DistCache.class,
+                StartsWithCountJob_DistCacheAPI.class,StartsWithCountJob_PrintCounters.class,
+                StartsWithCountJob_UserCounters.class,
                 ReviewJob.class, SimpleTextXmlJob.class,
-                SimpleTextXmlJob_CombineFileInputFormat.class
+                SimpleTextXmlJob_CombineFileInputFormat.class,
+                ReviewSequenceFileJob.class
         };
 
         try {
@@ -46,7 +65,7 @@ public class ExamplesDriver {
 
     static void addClasses(ProgramDriver pgd, Class<?>[] classes, String apiStr) throws Throwable {
         for (Class c : classes) {
-            pgd.addClass(apiStr+"-"+c.getSimpleName(), c, apiStr + " API: [" + c.getCanonicalName() + "] class");
+            pgd.addClass(apiStr + "-" + c.getSimpleName(), c, apiStr + " API: [" + c.getCanonicalName() + "] class");
         }
     }
 
