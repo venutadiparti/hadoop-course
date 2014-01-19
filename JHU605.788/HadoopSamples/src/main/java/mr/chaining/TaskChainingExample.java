@@ -23,7 +23,7 @@ import org.apache.hadoop.util.ToolRunner;
 import utils.FsUtil;
 
 /**
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.chaining.TaskChainingExample /training/data/books/ /training/playArea/MapperChainingExample/
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.chaining.TaskChainingExample examples_input/books/ /training/playArea/MapperChainingExample/
  *
  */
 public class TaskChainingExample extends Configured implements Tool {

@@ -2,6 +2,6 @@
 <configuration>
     <property>
 		<name>report.input.path</name>
-		<value>/training/data/reviews-xml/</value>
+		<value>examples_input/reviews-xml/</value>
 	</property>
 </configuration>

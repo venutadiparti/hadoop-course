@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 /**
 
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.avro.AvroWriterGeneric -Dreport.input.path=/training/data/reviews-xml/ -Dreport.output.path=/training/data/nullTests/reviews.avro $TRAINING_HOME/eclipse/workspace/HadoopSamples/src/main/resources/mr/reviews/fsstruct/avro/model/review.avsc
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.avro.AvroWriterGeneric -Dreport.input.path=examples_input/reviews-xml/ -Dreport.output.path=examples_input/nullTests/reviews.avro $TRAINING_HOME/eclipse/workspace/HadoopSamples/src/main/resources/mr/reviews/fsstruct/avro/model/review.avsc
  *
  */
 public class AvroWriterGeneric extends Configured implements Tool {

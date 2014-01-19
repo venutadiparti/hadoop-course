@@ -13,7 +13,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 /**
 yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.CompositeJoin <in1> <in2> <out>
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.CompositeJoin /training/data/compositeJoin/data1/ /training/data/compositeJoin/data2/ /training/playArea/compositeJoin/
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.CompositeJoin examples_input/compositeJoin/data1/ examples_input/compositeJoin/data2/ /training/playArea/compositeJoin/
  */
 public class CompositeJoin extends Configured implements Tool{
     public int run(String[] args) throws Exception {

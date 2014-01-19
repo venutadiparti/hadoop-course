@@ -32,7 +32,7 @@ public class StartsWithCountJob_DistCacheAPI extends Configured implements Tool{
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         
-        Path toCache = new Path("/training/data/startWithExcludeFile.txt");
+        Path toCache = new Path("examples_input/startWithExcludeFile.txt");
         job.addCacheFile(toCache.toUri());
 
         return job.waitForCompletion(true) ? 0 : 1;

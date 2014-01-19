@@ -6,7 +6,7 @@
 	</property>
 	<property>
 		<name>report.input.path</name>
-		<value>/training/data/reviews-xml/review-59[0-5].xml</value>
+		<value>examples_input/reviews-xml/review-59[0-5].xml</value>
 	</property>
 	<property>
 		<name>report.output.path</name>

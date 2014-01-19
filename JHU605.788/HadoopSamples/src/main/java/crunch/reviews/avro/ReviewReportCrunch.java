@@ -22,7 +22,7 @@ import org.apache.hadoop.util.ToolRunner;
 CRUNCH_JAR=/home/hadoop/.m2/repository/org/apache/crunch/crunch/0.5.0-cdh4.1.3/crunch-0.5.0-cdh4.1.3.jar
 AVRO_JAR=/home/hadoop/.m2/repository/org/apache/avro/avro-mapred/1.7.4/avro-mapred-1.7.4-hadoop2.jar
 HADOOP_CLASSPATH=$CRUNCH_JAR:$AVRO_JAR:$HADOOP_CLASSPATH
-yarn jar $PLAY_AREA/HadoopSamples.jar crunch.reviews.avro.ReviewReportCrunch -libjars /home/hadoop/.m2/repository/org/apache/crunch/crunch/0.5.0-cdh4.1.3/crunch-0.5.0-cdh4.1.3.jar,/home/hadoop/.m2/repository/org/apache/avro/avro-mapred/1.7.4/avro-mapred-1.7.4-hadoop2.jar -Dreport.value=invaluable,affordable /training/data/reviews-avro/reviews.avro /training/playArea/crunch
+yarn jar $PLAY_AREA/HadoopSamples.jar crunch.reviews.avro.ReviewReportCrunch -libjars /home/hadoop/.m2/repository/org/apache/crunch/crunch/0.5.0-cdh4.1.3/crunch-0.5.0-cdh4.1.3.jar,/home/hadoop/.m2/repository/org/apache/avro/avro-mapred/1.7.4/avro-mapred-1.7.4-hadoop2.jar -Dreport.value=invaluable,affordable examples_input/reviews-avro/reviews.avro /training/playArea/crunch
  * 
  */
 public class ReviewReportCrunch extends Configured implements Tool {

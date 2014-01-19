@@ -10,9 +10,7 @@ public class CopyToHdfs {
 
 	public static void main(String[] args) throws IOException {
 		FileSystem fs = FileSystem.get(new Configuration());
-		Path fromLocal = new Path(System.getenv("PLAY_AREA") + "/data/books/hamlet.txt");
-		Path toHdfs = new Path("/training/playArea/hamlet.txt");
-		fs.copyFromLocalFile(fromLocal, toHdfs);
+		fs.copyFromLocalFile(new Path(args[0]), new Path(args[1]));
 	}
 
 }
