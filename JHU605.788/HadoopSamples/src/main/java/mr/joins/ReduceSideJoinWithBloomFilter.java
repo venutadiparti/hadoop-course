@@ -15,7 +15,7 @@ import org.apache.hadoop.util.ToolRunner;
 yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.joins.ReduceSideJoinWithBloomFilter -file <bloom> <user_posts_path> <users_likes_path> <output_path>
 
 BLOOM=$TRAINING_HOME/eclipse/workspace/HadoopSamples/src/main/resources/mr/reviews/joins/userBloomFilter.bloom 
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.joins.ReduceSideJoinWithBloomFilter -files $BLOOM -D bloom.filter.file=userBloomFilter.bloom /data/users/user-posts.txt /data/users/user-likes.txt /training/playArea/reduceSideJoin/
+yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReduceSideJoinWithBloomFilter -files $BLOOM -D bloom.filter.file=userBloomFilter.bloom /data/users/user-posts.txt /data/users/user-likes.txt /training/playArea/reduceSideJoin/
  */
 public class ReduceSideJoinWithBloomFilter extends Configured implements Tool{
     
