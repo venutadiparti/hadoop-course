@@ -6,7 +6,7 @@ resources="$scriptPath/../../main/resources/"
 
 
 samplesJar=$scriptPath/../../../target/HadoopSamples-*.jar
-repo="~/.m2/repository"
+repo="$HOME/.m2/repository"
 avroMapRedJar="$repo/org/apache/avro/avro-mapred/1.7.4/avro-mapred-1.7.4-hadoop2.jar"
 
 echo "--------------"
