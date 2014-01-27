@@ -8,7 +8,7 @@ public class LoadConfigurations {
 	public static void main(String[] args) {
 		Configuration conf = new Configuration();
 		System.out.println("After construction: " + conf.get(PROP_NAME));
-		conf.addResource(new Path(System.getenv("HADOOP_CONF_DIR") + "/core-site.xml"));
+		conf.addResource(new Path("/etc/hadoop/conf/core-site.xml"));
 		System.out.println("After addResource: " + conf.get(PROP_NAME));
 		conf.set(PROP_NAME, "hdfs://localhost:8111");
 		System.out.println("After set: " + conf.get(PROP_NAME));
