@@ -15,7 +15,7 @@
     <repositories>
         <repository>
             <id>cloudera</id>
-            <url>http://repository.cloudera.com/artifactory/cloudera-repos</url>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
         </repository>
         <repository>
             <id>MavenCentral</id>
@@ -33,7 +33,7 @@
         </pluginRepository>
         <pluginRepository>
             <id>cloudera-plugins</id>
-            <url>http://repository.cloudera.com/artifactory/cloudera-repos</url>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
         </pluginRepository>
 
     </pluginRepositories>
