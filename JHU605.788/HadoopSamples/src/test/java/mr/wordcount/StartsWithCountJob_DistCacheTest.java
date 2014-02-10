@@ -39,7 +39,7 @@ public class StartsWithCountJob_DistCacheTest {
     public void testWithLocalJobRunner() throws Exception {
       Configuration conf = new Configuration();
       conf.set("mapreduce.framework.name", "local");
-      conf.set("fs.default.name", "file:///");
+      conf.set("fs.defaultFS", "file:///");
       DistributedCache.addCacheFile(distCacheFile.toURI(), conf);
       
       StartsWithCountJob_DistCache underTest = new StartsWithCountJob_DistCache();

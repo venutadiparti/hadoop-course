@@ -25,7 +25,7 @@ public class EntireFileRecordReaderTests {
     @Before
     public void setUpTest() throws IOException {
         FileUtils.deleteQuietly(inputFile);
-        conf.set("fs.default.name", "file:///");
+        conf.set("fs.defaultFS", "file:///");
     }
 
     @Test

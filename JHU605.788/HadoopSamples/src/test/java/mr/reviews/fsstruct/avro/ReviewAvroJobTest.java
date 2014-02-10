@@ -41,7 +41,7 @@ public class ReviewAvroJobTest {
         prepareLocalLocations();
         conf = new Configuration();
         conf.set("mapreduce.framework.name", "local");
-        conf.set("fs.default.name", "file:///");
+        conf.set("fs.defaultFS", "file:///");
     }
 
     @Test

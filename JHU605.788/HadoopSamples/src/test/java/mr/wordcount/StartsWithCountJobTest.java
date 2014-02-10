@@ -31,7 +31,7 @@ public class StartsWithCountJobTest {
     public void testWithLocalJobRunner() throws Exception {
       Configuration conf = new Configuration();
       conf.set("mapreduce.framework.name", "local");
-      conf.set("fs.default.name", "file:///");
+      conf.set("fs.defaultFS", "file:///");
         
       StartsWithCountJob underTest = new StartsWithCountJob();
       underTest.setConf(conf);
