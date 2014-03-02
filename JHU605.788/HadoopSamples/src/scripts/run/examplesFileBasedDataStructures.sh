@@ -23,6 +23,7 @@ yarn jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar sort \
 execCommand "hdfs dfs -mv /training/out/seq-to-map/part-r-00000 /training/out/seq-to-map/data"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.mf.MapFileFix /training/out/seq-to-map/"
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.mf.MfReader /training/out/seq-to-map/"
+execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.mf.MfByKeyReader /training/out/seq-to-map/ 5"
 
 hdfs dfs -rm -r examples_input/reviews-seq/
 hdfs dfs -rm -r /training/out/seq-to-map/

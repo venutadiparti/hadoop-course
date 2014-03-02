@@ -23,7 +23,7 @@ public class MfReader extends Configured implements Tool {
         }
 
         FileSystem fs = FileSystem.get(getConf());
-        Validate.isTrue(fs.exists(from));
+        Validate.isTrue(fs.exists(from), "From directory does not exist");
 
         int i = 0;
         Reader reader = null;
@@ -33,7 +33,7 @@ public class MfReader extends Configured implements Tool {
             Writable value = (Writable) ReflectionUtils.newInstance(reader.getValueClass(), getConf());
             readerLoop: while (reader.next(key, value)) {
                 printToScreen(key, value);
-                i+=10;
+                i+=1;
                 if (i > maxRecordsToRead) {
                     break readerLoop;
                 }
