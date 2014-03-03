@@ -13,6 +13,9 @@ execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.seq.Seque
 
 execCommand "HADOOP_CLASSPATH=$PLAY_AREA/HadoopSamples.jar \
 yarn jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar sort \
+  -Dmapreduce.output.fileoutputformat.compress=true \
+  -Dmapreduce.output.fileoutputformat.compress.codec=org.apache.hadoop.io.compress.SnappyCodec \
+  -Dmapreduce.output.fileoutputformat.compress.type=BLOCK \
   -libjars $PLAY_AREA/HadoopSamples.jar \
   -r 1 \
   -inFormat org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat \
