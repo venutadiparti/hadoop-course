@@ -61,7 +61,7 @@ public class AvroWriterGeneric extends Configured implements Tool {
                 Review review = xmlHelper.convert(bytes);
                 record.put("user", review.getUser());
                 record.put("text", review.getText());
-                record.put("timestamp", null);
+                record.put("timestamp", review.getTimestamp());
                 writer.append(record);
             }
 

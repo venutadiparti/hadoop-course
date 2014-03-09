@@ -5,10 +5,26 @@
  */
 package mr.reviews.fsstruct.avro.model;  
 @SuppressWarnings("all")
+@org.apache.avro.specific.AvroGenerated
 public class ReviewKeyAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ReviewKeyAvro\",\"namespace\":\"mr.reviews.fsstruct.avro.model\",\"fields\":[{\"name\":\"user\",\"type\":\"string\"},{\"name\":\"keyword\",\"type\":\"string\"}]}");
+  public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence user;
   @Deprecated public java.lang.CharSequence keyword;
+
+  /**
+   * Default constructor.
+   */
+  public ReviewKeyAvro() {}
+
+  /**
+   * All-args constructor.
+   */
+  public ReviewKeyAvro(java.lang.CharSequence user, java.lang.CharSequence keyword) {
+    this.user = user;
+    this.keyword = keyword;
+  }
+
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
@@ -96,11 +112,11 @@ public class ReviewKeyAvro extends org.apache.avro.specific.SpecificRecordBase i
     private Builder(mr.reviews.fsstruct.avro.model.ReviewKeyAvro other) {
             super(mr.reviews.fsstruct.avro.model.ReviewKeyAvro.SCHEMA$);
       if (isValidValue(fields()[0], other.user)) {
-        this.user = (java.lang.CharSequence) data().deepCopy(fields()[0].schema(), other.user);
+        this.user = data().deepCopy(fields()[0].schema(), other.user);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.keyword)) {
-        this.keyword = (java.lang.CharSequence) data().deepCopy(fields()[1].schema(), other.keyword);
+        this.keyword = data().deepCopy(fields()[1].schema(), other.keyword);
         fieldSetFlags()[1] = true;
       }
     }

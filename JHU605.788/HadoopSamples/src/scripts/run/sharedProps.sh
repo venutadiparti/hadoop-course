@@ -2,7 +2,9 @@
 
 script=$(readlink -f "$0")
 scriptPath=$(dirname "$script")
-resources="$scriptPath/../../main/resources/"
+srcLoc="$scriptPath/../../main"
+resources="${srcLoc}/resources/"
+javaLoc="${srcLoc}/java/"
 
 
 samplesJar=$scriptPath/../../../target/HadoopSamples-*.jar

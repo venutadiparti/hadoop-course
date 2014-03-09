@@ -4,7 +4,9 @@ import java.io.InputStream;
 
 import mr.reviews.fsstruct.avro.model.ReviewAvro;
 
+import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileStream;
+import org.apache.avro.io.DatumReader;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.commons.lang.Validate;
@@ -29,15 +31,7 @@ public class AvroReaderSpecific extends Configured implements Tool {
         DataFileStream<ReviewAvro> reader = null;
         try {
             in = fs.open(inputPath);
-            // Prior 1.7.3 release will use classloader that many not have 
-            // knowledge of ReviewAvro class will not be found; avro then defaults
-            // to GenericData$Record which cause this code to get
-            // ClassCastException; This issue is addressed/explained in
-            // https://issues.apache.org/jira/browse/AVRO-1123
-            SpecificData specificData = new SpecificData(this.getClass().getClassLoader());
-            SpecificDatumReader<ReviewAvro> specificDatumReader = new SpecificDatumReader<ReviewAvro>(
-                    ReviewAvro.SCHEMA$, ReviewAvro.SCHEMA$, specificData);
-            reader = new DataFileStream<ReviewAvro>(in, specificDatumReader);
+            reader = new DataFileStream<ReviewAvro>(in, new SpecificDatumReader<ReviewAvro>(ReviewAvro.class));
             ReviewAvro review = null;
             while (reader.hasNext()) {
                 // ReviewAvro object could be re-used in this way

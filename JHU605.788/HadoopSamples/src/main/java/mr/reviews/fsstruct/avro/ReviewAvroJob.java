@@ -12,6 +12,7 @@ import org.apache.avro.mapreduce.AvroKeyInputFormat;
 import org.apache.avro.mapreduce.AvroKeyOutputFormat;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.io.compress.SnappyCodec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -40,19 +41,22 @@ public class ReviewAvroJob extends Configured implements Tool {
 		
 		job.setOutputFormatClass(AvroKeyOutputFormat.class);
 		AvroKeyOutputFormat.setOutputPath(job, confHelper.getOutputPath());
-		
+
+
+        AvroKeyOutputFormat.setCompressOutput(job, true);
 		// **********************************************
-//      AvroKeyOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
-        // This will not work as avro uses its own property but the method still
-        // exists since Avro's output format(s) extend FileOutputFormat; this is
-        // one downfall of inheritance
+        // The following does not work:
+        //   1. AvroKeyOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
+        //      Method still exists since Avro's output format(s) extend FileOutputFormat;
+        //      this is one downfall of inheritance
         // **********************************************
-		
-		AvroKeyOutputFormat.setCompressOutput(job, true);
-		jobConf.set(FileOutputFormat.COMPRESS_CODEC, CodecFactory.snappyCodec().toString());
-        
+
+        // this property expect the string "snappy" and not the fully qualified class
+        jobConf.set(AvroJob.CONF_OUTPUT_CODEC, CodecFactory.snappyCodec().toString());
+
+
 		AvroJob.setOutputKeySchema(job, ReviewReportAvro.SCHEMA$);
-        // use the schema instead of set these methods
+        // uses the schema instead of set these methods
 //        job.setOutputKeyClass(ReviewAvro.class);
 //        job.setOutputValueClass(NullWritable.class);
 		
@@ -64,8 +68,6 @@ public class ReviewAvroJob extends Configured implements Tool {
 		// configure keys used between mappers and reducers
 		AvroJob.setMapOutputKeySchema(job, ReviewKeyAvro.SCHEMA$);
 		AvroJob.setMapOutputValueSchema(job, ReviewReportAvro.SCHEMA$);
-//		job.setMapOutputKeyClass(AvroKey.class);
-//		job.setMapOutputValueClass(AvroValue.class);
     }
 
 	public static void main(String[] args) throws Exception {

@@ -5,12 +5,30 @@
  */
 package mr.reviews.fsstruct.avro.model;  
 @SuppressWarnings("all")
+@org.apache.avro.specific.AvroGenerated
 public class ReviewReportAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ReviewReportAvro\",\"namespace\":\"mr.reviews.fsstruct.avro.model\",\"fields\":[{\"name\":\"user\",\"type\":\"string\"},{\"name\":\"keyword\",\"type\":\"string\"},{\"name\":\"numReviews\",\"type\":\"int\"},{\"name\":\"reviews\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"ReviewAvro\",\"fields\":[{\"name\":\"user\",\"type\":\"string\"},{\"name\":\"text\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"long\"}]}}}]}");
+  public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence user;
   @Deprecated public java.lang.CharSequence keyword;
   @Deprecated public int numReviews;
   @Deprecated public java.util.List<mr.reviews.fsstruct.avro.model.ReviewAvro> reviews;
+
+  /**
+   * Default constructor.
+   */
+  public ReviewReportAvro() {}
+
+  /**
+   * All-args constructor.
+   */
+  public ReviewReportAvro(java.lang.CharSequence user, java.lang.CharSequence keyword, java.lang.Integer numReviews, java.util.List<mr.reviews.fsstruct.avro.model.ReviewAvro> reviews) {
+    this.user = user;
+    this.keyword = keyword;
+    this.numReviews = numReviews;
+    this.reviews = reviews;
+  }
+
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
@@ -134,19 +152,19 @@ public class ReviewReportAvro extends org.apache.avro.specific.SpecificRecordBas
     private Builder(mr.reviews.fsstruct.avro.model.ReviewReportAvro other) {
             super(mr.reviews.fsstruct.avro.model.ReviewReportAvro.SCHEMA$);
       if (isValidValue(fields()[0], other.user)) {
-        this.user = (java.lang.CharSequence) data().deepCopy(fields()[0].schema(), other.user);
+        this.user = data().deepCopy(fields()[0].schema(), other.user);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.keyword)) {
-        this.keyword = (java.lang.CharSequence) data().deepCopy(fields()[1].schema(), other.keyword);
+        this.keyword = data().deepCopy(fields()[1].schema(), other.keyword);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.numReviews)) {
-        this.numReviews = (java.lang.Integer) data().deepCopy(fields()[2].schema(), other.numReviews);
+        this.numReviews = data().deepCopy(fields()[2].schema(), other.numReviews);
         fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.reviews)) {
-        this.reviews = (java.util.List<mr.reviews.fsstruct.avro.model.ReviewAvro>) data().deepCopy(fields()[3].schema(), other.reviews);
+        this.reviews = data().deepCopy(fields()[3].schema(), other.reviews);
         fieldSetFlags()[3] = true;
       }
     }
