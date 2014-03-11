@@ -16,12 +16,12 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.Logger;
 
 public class StartsWithCountMapper_DistCache extends Mapper<LongWritable, Text, Text, IntWritable> {
-    private Logger log = Logger.getLogger(StartsWithCountMapper_DistCache.class);
+    protected Logger log = Logger.getLogger(StartsWithCountMapper_DistCache.class);
     private final static IntWritable countOne = new IntWritable(1);
     private final Text reusableText = new Text();
 
     public final static String EXCLUDE_FILE = "startWithExcludeFile.txt";
-    private final Set<String> excludeSet = new HashSet<String>();
+    protected final Set<String> excludeSet = new HashSet<String>();
 
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
