@@ -77,7 +77,7 @@ public class AvroSorter extends Configured implements Tool {
         AvroKeyOutputFormat.setOutputPath(job, to);
         
         AvroKeyOutputFormat.setCompressOutput(job, true);
-        jobConf.set(FileOutputFormat.COMPRESS_CODEC, CodecFactory.snappyCodec().toString());
+        jobConf.set(AvroJob.CONF_OUTPUT_CODEC, CodecFactory.snappyCodec().toString());
         AvroJob.setOutputKeySchema(job, schema);
         
         // sort mapper and reducer

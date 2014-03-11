@@ -57,7 +57,7 @@ public class ReviewAvroInputOutputJob extends Configured implements Tool {
         // **********************************************
 		
 		AvroKeyOutputFormat.setCompressOutput(job, true);
-		jobConf.set(FileOutputFormat.COMPRESS_CODEC, CodecFactory.snappyCodec().toString());
+		jobConf.set(AvroJob.CONF_OUTPUT_CODEC, CodecFactory.snappyCodec().toString());
 		job.setOutputKeyClass(ReviewAvro.class);
         job.setOutputValueClass(NullWritable.class);
         AvroJob.setOutputKeySchema(job, ReviewReportAvro.SCHEMA$);
