@@ -25,11 +25,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.OutputStream;
 
-/**
-
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.reviews.fsstruct.avro.AvroWriterGeneric -Dreport.input.path=examples_input/reviews-xml/ -Dreport.output.path=examples_input/nullTests/reviews.avro $TRAINING_HOME/eclipse/workspace/HadoopSamples/src/main/resources/mr/reviews/fsstruct/avro/model/review.avsc
- *
- */
 public class AvroAppenderGeneric extends Configured implements Tool {
     private static Logger LOG = LoggerFactory.getLogger(AvroAppenderGeneric.class);
     @Override
