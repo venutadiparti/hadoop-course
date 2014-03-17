@@ -14,35 +14,39 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
 public class ScanBatchingExample {
-	
-	private static void printResults(HTable hTable, Scan scan) throws IOException {
-		System.out.println("\n------------------");
-		System.out.println("Batch=" + scan.getBatch());
-		ResultScanner scanner = hTable.getScanner(scan);
-		for ( Result result : scanner){
-			System.out.println("Result: ");
-			for ( KeyValue keyVal : result.list()){
-				System.out.println("  " + 
-						Bytes.toString(keyVal.getFamily()) + ":" +
-						Bytes.toString(keyVal.getQualifier()) + " => " +
-						Bytes.toString(keyVal.getValue()));
-			}
-		}
-		scanner.close();
-	}
-	
-	public static void main(String[] args) throws IOException {
-		Configuration conf = HBaseConfiguration.create();
-		HTable hTable = new HTable(conf, "HBaseSamples");
-		
-		Scan scan = new Scan();
-		scan.addFamily(toBytes("columns"));
-		printResults(hTable, scan); 
-		
-		scan.setBatch(2);
-		printResults(hTable, scan); 
-		
-		hTable.close();
-	}
+
+    private static void printResults(HTable hTable, Scan scan) throws IOException {
+        System.out.println("\n------------------");
+        System.out.println("Batch=" + scan.getBatch());
+        ResultScanner scanner = hTable.getScanner(scan);
+        try {
+            for (Result result : scanner) {
+                System.out.println("Result: ");
+                for (KeyValue keyVal : result.list()) {
+                    System.out.println("  " +
+                            Bytes.toString(keyVal.getFamily()) + ":" +
+                            Bytes.toString(keyVal.getQualifier()) + " => " +
+                            Bytes.toString(keyVal.getValue()));
+                }
+            }
+        } finally {
+            scanner.close();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        Configuration conf = HBaseConfiguration.create();
+        HTable hTable = new HTable(conf, "HBaseSamples");
+        try {
+            Scan scan = new Scan();
+            scan.addFamily(toBytes("columns"));
+            printResults(hTable, scan);
+
+            scan.setBatch(2);
+            printResults(hTable, scan);
+        } finally {
+            hTable.close();
+        }
+    }
 
 }

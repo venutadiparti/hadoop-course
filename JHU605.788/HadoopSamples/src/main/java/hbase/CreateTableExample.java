@@ -12,21 +12,23 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 
 public class CreateTableExample {
 
-	public static void main(String[] args) throws IOException {
-		Configuration conf = HBaseConfiguration.create();
-		HBaseAdmin admin = new HBaseAdmin(conf);
-		
-		String name = "NewTable";
-		byte [] tableName = toBytes(name);
-		HTableDescriptor table = new HTableDescriptor(tableName);
-		HColumnDescriptor family = new HColumnDescriptor(toBytes("new_family"));
-		table.addFamily(family);
-		
-		System.out.println("Table "+name+" exist: " + admin.tableExists(tableName)) ;
-		System.out.println("Creating "+name+" table...");
-		admin.createTable(table);
-		System.out.println("Table "+name+" exist: " + admin.tableExists(tableName)) ;
-		admin.close();
-	}
+    public static void main(String[] args) throws IOException {
+        Configuration conf = HBaseConfiguration.create();
+        HBaseAdmin admin = new HBaseAdmin(conf);
+        try {
+            String name = "NewTable";
+            byte[] tableName = toBytes(name);
+            HTableDescriptor table = new HTableDescriptor(tableName);
+            HColumnDescriptor family = new HColumnDescriptor(toBytes("new_family"));
+            table.addFamily(family);
+
+            System.out.println("Table " + name + " exist: " + admin.tableExists(tableName));
+            System.out.println("Creating " + name + " table...");
+            admin.createTable(table);
+            System.out.println("Table " + name + " exist: " + admin.tableExists(tableName));
+        } finally {
+            admin.close();
+        }
+    }
 
 }

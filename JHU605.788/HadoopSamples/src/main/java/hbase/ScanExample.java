@@ -13,31 +13,36 @@ import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.util.Bytes;
 
 public class ScanExample {
-	
-	public static void main(String[] args) throws IOException {
-		Configuration conf = HBaseConfiguration.create();
-		HTable hTable = new HTable(conf, "HBaseSamples");
-		
-		scan(hTable, "row-03", "row-05");
-		scan(hTable, "row-10", "row-15");
-		hTable.close();
-	}
 
-	private static void scan(HTable hTable, String startRow, 
-			String stopRow) throws IOException {
-		System.out.println("Scanning from " +
-				"["+startRow+"] to ["+stopRow+"]");
-		
-		Scan scan = new Scan(toBytes(startRow), toBytes(stopRow));
-		scan.addColumn(toBytes("metrics"), toBytes("counter"));
-		ResultScanner scanner = hTable.getScanner(scan);		
-		for ( Result result : scanner){
-			byte [] value = result.getValue(
-					toBytes("metrics"), toBytes("counter"));
-			System.out.println("  " + 
-					Bytes.toString(result.getRow()) + " => " + 
-					Bytes.toString(value));
-		} 
-		scanner.close();
-	}
+    public static void main(String[] args) throws IOException {
+        Configuration conf = HBaseConfiguration.create();
+        HTable hTable = new HTable(conf, "HBaseSamples");
+        try {
+            scan(hTable, "row-03", "row-05");
+            scan(hTable, "row-10", "row-15");
+        } finally {
+            hTable.close();
+        }
+    }
+
+    private static void scan(HTable hTable, String startRow,
+                             String stopRow) throws IOException {
+        System.out.println("Scanning from " +
+                "[" + startRow + "] to [" + stopRow + "]");
+
+        Scan scan = new Scan(toBytes(startRow), toBytes(stopRow));
+        scan.addColumn(toBytes("metrics"), toBytes("counter"));
+        ResultScanner scanner = hTable.getScanner(scan);
+        try {
+            for (Result result : scanner) {
+                byte[] value = result.getValue(
+                        toBytes("metrics"), toBytes("counter"));
+                System.out.println("  " +
+                        Bytes.toString(result.getRow()) + " => " +
+                        Bytes.toString(value));
+            }
+        } finally {
+            scanner.close();
+        }
+    }
 }

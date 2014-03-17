@@ -10,13 +10,16 @@ import org.apache.hadoop.hbase.client.HBaseAdmin;
 
 public class DropTableExample {
 
-	public static void main(String[] args) throws IOException {
-		Configuration conf = HBaseConfiguration.create();
-		HBaseAdmin admin = new HBaseAdmin(conf);
-		byte [] tableName = toBytes("NewTable");
-		admin.disableTable(tableName);
-		admin.deleteTable(tableName);	
-		admin.close();
-	}
+    public static void main(String[] args) throws IOException {
+        Configuration conf = HBaseConfiguration.create();
+        HBaseAdmin admin = new HBaseAdmin(conf);
+        try {
+            byte[] tableName = toBytes("NewTable");
+            admin.disableTable(tableName);
+            admin.deleteTable(tableName);
+        } finally {
+            admin.close();
+        }
+    }
 
 }

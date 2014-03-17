@@ -10,17 +10,18 @@ import org.apache.hadoop.hbase.client.Delete;
 import org.apache.hadoop.hbase.client.HTable;
 
 public class DeleteExample {
-	public static void main(String[] args) throws IOException {
-		Configuration conf = HBaseConfiguration.create();
-		HTable hTable = new HTable(conf, "HBaseSamples");
-		
-		Delete delete = new Delete(toBytes("rowToDelete"));		
-		hTable.delete(delete);
-		
-		Delete delete1 = new Delete(toBytes("anotherRow"));
-		delete1.deleteColumns(toBytes("metrics"), toBytes("loan"));
-		hTable.delete(delete1);
-		
-		hTable.close();
-	}
+    public static void main(String[] args) throws IOException {
+        Configuration conf = HBaseConfiguration.create();
+        HTable hTable = new HTable(conf, "HBaseSamples");
+        try {
+            Delete delete = new Delete(toBytes("rowToDelete"));
+            hTable.delete(delete);
+
+            Delete delete1 = new Delete(toBytes("anotherRow"));
+            delete1.deleteColumns(toBytes("metrics"), toBytes("loan"));
+            hTable.delete(delete1);
+        } finally {
+            hTable.close();
+        }
+    }
 }
