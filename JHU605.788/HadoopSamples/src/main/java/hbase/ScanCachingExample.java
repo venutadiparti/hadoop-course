@@ -15,13 +15,11 @@ import org.apache.hadoop.hbase.util.Bytes;
 public class ScanCachingExample {
 
     private static void printResults(HTable hTable, Scan scan) throws IOException {
-        System.out.println("\nCaching table=" + hTable.getScannerCaching() +
-                ", scanner=" + scan.getCaching());
+        System.out.println("\nScanner=" + scan.getCaching());
         ResultScanner scanner = hTable.getScanner(scan);
         try {
             for (Result result : scanner) {
-                byte[] value = result.getValue(
-                        toBytes("metrics"), toBytes("counter"));
+                byte[] value = result.getValue(toBytes("metrics"), toBytes("counter"));
                 System.out.println("  " +
                         Bytes.toString(result.getRow()) + " => " +
                         Bytes.toString(value));
@@ -37,9 +35,6 @@ public class ScanCachingExample {
         try {
             Scan scan = new Scan();
             scan.addColumn(toBytes("metrics"), toBytes("counter"));
-            printResults(hTable, scan);
-
-            hTable.setScannerCaching(5);
             printResults(hTable, scan);
 
             scan.setCaching(10);
