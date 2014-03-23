@@ -36,16 +36,15 @@ public class FindReviewsByKeywordMapperTest {
     public void test() throws IOException {
         ImmutableBytesWritable key = new ImmutableBytesWritable(Bytes.toBytes("key"));
         Result result = getResult(key);
-        
-        Configuration conf = new Configuration();
-        String keyword = "where";
-        conf.set(ReviewJob.PROP_FIND_VALUE, keyword);
-        
+
         MapDriver<ImmutableBytesWritable, Result, NullWritable, Writable> mapD = 
                 new MapDriver<ImmutableBytesWritable, Result, NullWritable, Writable>()
-                    .withConfiguration(conf)
                     .withMapper(new FindReviewsByKeywordMapper())
                     .withInput(key, result);
+        Configuration conf = mapD.getConfiguration();
+        String keyword = "where";
+        conf.set(ReviewJob.PROP_FIND_VALUE, keyword);
+
         List<Pair<NullWritable, Writable>> results = mapD.run();
         assertEquals(1, results.size());
         Put res = (Put)results.get(0).getSecond();
