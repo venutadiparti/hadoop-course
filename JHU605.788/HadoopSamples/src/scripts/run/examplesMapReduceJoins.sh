@@ -14,11 +14,11 @@ execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReplicatedJoin -Drep
 rm userToState.txt
 
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReduceSideJoin examples_input/postAndLikes/user-posts.txt examples_input/postAndLikes/user-likes.txt /training/playArea/reduceSideJoin/"
-hdfs dfs -cat /training/playArea/reduceSideJoin/inner-r-00000
-hdfs dfs -cat /training/playArea/reduceSideJoin/leftOute/training/playArea/reduceSideJoinr-r-00000
-hdfs dfs -cat /training/playArea/reduceSideJoin/rightOuter-r-00000
-hdfs dfs -cat /training/playArea/reduceSideJoin/fullOuter-r-00000
-hdfs dfs -cat /training/playArea/reduceSideJoin/anti-r-00000
+execCommand "hdfs dfs -stat /training/playArea/reduceSideJoin/inner-r-00000"
+execCommand "hdfs dfs -stat /training/playArea/reduceSideJoin/leftOuter-r-00000"
+execCommand "hdfs dfs -stat /training/playArea/reduceSideJoin/rightOuter-r-00000"
+execCommand "hdfs dfs -stat /training/playArea/reduceSideJoin/fullOuter-r-00000"
+execCommand "hdfs dfs -stat /training/playArea/reduceSideJoin/anti-r-00000"
 hdfs dfs -rm -r /training/playArea/reduceSideJoin
 
 execCommand "yarn jar $PLAY_AREA/HadoopSamples.jar mr.joins.ReduceSideJoinWithBloomFilter \
