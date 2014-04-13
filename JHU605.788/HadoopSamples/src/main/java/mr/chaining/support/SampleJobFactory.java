@@ -25,10 +25,8 @@ public class SampleJobFactory {
     public static Job randomTextWriter(Configuration inConf, String name, Path outputPath) {
         try {
             Configuration conf = new Configuration(inConf);
-            setMemory(conf);
-            
             conf.setInt(MRJobConfig.NUM_MAPS, 1);
-            conf.setLong(RandomTextGen.BYTES_PER_MAP, 100*1024 ); // 100k
+            conf.setLong(RandomTextGen.BYTES_PER_MAP, 10*1024 ); // 10k
             
             Job job = Job.getInstance(conf, name);
             job.setJarByClass(SampleJobFactory.class);
@@ -51,7 +49,6 @@ public class SampleJobFactory {
     public static Job createWordCount(Configuration inConf, String name, Path input, Path output) {
         try {
             Configuration conf = new Configuration(inConf);
-            setMemory(conf);
             Job job = Job.getInstance(conf, name);
             job.setJarByClass(SampleJobFactory.class);
             
@@ -71,7 +68,6 @@ public class SampleJobFactory {
     public static Job createGrep(Configuration inConf, String name, Path input, Path output, String grepExpression) {
         try {
             Configuration conf = new Configuration(inConf);
-            setMemory(conf);
             conf.set(RegexMapper.PATTERN, grepExpression);
             
             Job job = Job.getInstance(conf, name);
@@ -93,13 +89,5 @@ public class SampleJobFactory {
         } catch (IOException e) {
             throw new IllegalArgumentException("Failed to create [" + name + "] job", e);
         }
-    }
-    
-    public static void setMemory(Configuration conf){
-        conf.setInt("mapreduce.map.memory.mb", 96);
-        conf.setInt("mapreduce.reduce.memory.mb", 96);
-        
-        conf.set("mapreduce.map.java.opts", "-Xmx32m");
-        conf.set("mapreduce.reduce.java.opts", "-Xmx32m");
     }
 }

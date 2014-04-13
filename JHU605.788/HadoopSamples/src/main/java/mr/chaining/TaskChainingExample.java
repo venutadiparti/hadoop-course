@@ -22,10 +22,6 @@ import org.apache.hadoop.util.ToolRunner;
 
 import utils.FsUtil;
 
-/**
-yarn jar $PLAY_AREA/HadoopSamples.jar mr.chaining.TaskChainingExample examples_input/books/ /training/playArea/MapperChainingExample/
- *
- */
 public class TaskChainingExample extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         Path in = new Path(args[0]);
