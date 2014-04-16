@@ -8,15 +8,15 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class ReduceSideJoinWithSecondarySortUsersLikesMapper extends Mapper<LongWritable, Text, TextPair, TextPair> {
-    private final Text indicator = new Text("R");
+public class RightSideMapper extends Mapper<LongWritable, Text, TextPair, TextPair> {
+    public static final Text INDICATOR = new Text("R");
     private final Text joinKey = new Text();
 
     private final TextPair joinKeyPair = new TextPair();
     private final TextPair valuePair = new TextPair();
     {
-        joinKeyPair.setSecond(indicator);
-        valuePair.setSecond(indicator);
+        joinKeyPair.setSecond(INDICATOR);
+        valuePair.setSecond(INDICATOR);
     }
     
     @Override

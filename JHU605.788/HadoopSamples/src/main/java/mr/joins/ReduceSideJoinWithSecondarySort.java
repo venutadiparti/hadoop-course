@@ -25,9 +25,9 @@ public class ReduceSideJoinWithSecondarySort extends Configured implements Tool{
         job.setJarByClass(getClass());
         
         MultipleInputs.addInputPath(job, new Path(args[0]), 
-                TextInputFormat.class, ReduceSideJoinWithSecondarySortUsersPostsMapper.class);
+                TextInputFormat.class, LeftSideMapper.class);
         MultipleInputs.addInputPath(job, new Path(args[1]), 
-                TextInputFormat.class, ReduceSideJoinWithSecondarySortUsersLikesMapper.class);
+                TextInputFormat.class, RightSideMapper.class);
         
         job.setReducerClass(ReduceSideJoinWithSecondarySortReducer.class);
         TextOutputFormat.setOutputPath(job, new Path(args[2]));
